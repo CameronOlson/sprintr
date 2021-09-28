@@ -3,8 +3,8 @@ const Schema = mongoose.Schema
 
 export const BacklogItemSchema = new Schema(
   {
-    name: { tyoe: String, required: true },
-    description: { tyoe: String, required: true },
+    name: { type: String, required: true },
+    description: { type: String, required: true },
     status: {
       type: String,
       enum: ['Pending', 'In Progress', 'Review', 'Done'],
