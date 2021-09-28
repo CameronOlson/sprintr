@@ -7,7 +7,7 @@ export class NotesController extends BaseController {
     super('api/projects/:projectId/notes')
     this.router
       .get('', this.getNotes)
-      .get(':/noteId', this.getNoteById)
+      .get('/:noteId', this.getNoteById)
       .use(Auth0Provider.getAuthorizedUserInfo)
       .post('', this.createNote)
       .put('/:noteId', this.editNote)

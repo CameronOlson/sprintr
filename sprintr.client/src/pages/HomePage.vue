@@ -1,10 +1,12 @@
 <template>
   <div class="home flex-grow-1 d-flex flex-column align-items-center justify-content-center">
-    <div class="home-card p-5 bg-white rounded elevation-3">
-      <img src="https://bcw.blob.core.windows.net/public/img/8600856373152463" alt="CodeWorks Logo" class="rounded-circle">
-      <h1 class="my-5 bg-dark text-white p-3 rounded text-center">
-        Vue 3 Starter
-      </h1>
+    <div class="card card-size m-3">
+      <div class="card-body">
+        <div class="card-title">
+          This is the card title
+        </div>
+        This will be where everything will go
+      </div>
     </div>
   </div>
 </template>
@@ -32,5 +34,10 @@ export default {
       object-position: center;
     }
   }
+}
+
+.card-size{
+  height: 80vh;
+  width: 80vw;
 }
 </style>

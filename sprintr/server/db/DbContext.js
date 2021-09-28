@@ -4,6 +4,7 @@ import { BacklogItemSchema } from '../models/BacklogItem'
 import { NoteSchema } from '../models/Note'
 import { ProjectSchema } from '../models/Project'
 import { SprintSchema } from '../models/Sprint'
+import { TaskSchema } from '../models/Task'
 import { ValueSchema } from '../models/Value'
 
 class DbContext {
@@ -14,9 +15,10 @@ class DbContext {
   // REVIEW we might need the account on this, maybe
   Projects = mongoose.model('Project', ProjectSchema);
   Sprints = mongoose.model('Sprint', SprintSchema);
-  BacklogItems = mongoose.model('BacklogItem', BacklogItemSchema)
+  BacklogItems = mongoose.model('BacklogItem', BacklogItemSchema);
 
-  Notes = mongoose.model('Note', NoteSchema)
+  Notes = mongoose.model('Note', NoteSchema);
+  Tasks = mongoose.model('Task', TaskSchema)
 }
 
 export const dbContext = new DbContext()
