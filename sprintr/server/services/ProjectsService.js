@@ -24,6 +24,7 @@ class ProjectsService {
 
   async createProject(projectData) {
     const project = await dbContext.Projects.create(projectData)
+    await project.populate('creator', 'name')
     if (!project) {
       throw new BadRequest('there is no project ')
     }
