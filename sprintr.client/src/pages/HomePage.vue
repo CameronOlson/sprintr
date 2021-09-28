@@ -6,8 +6,10 @@
           <button class=" btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#post-form">
             Create Project
           </button>
+          <div>
+            <ProjectCard v-for="p in projects" :key="p.id" :project="p" />
+          </div>
         </div>
-        This will be where everything will go
       </div>
     </div>
   </div>
@@ -25,8 +27,24 @@
 </template>
 
 <script>
+import { computed, onMounted } from '@vue/runtime-core'
+import { AppState } from '../AppState'
+import { projectsService } from '../services/ProjectsService'
+import Pop from '../utils/Pop'
 export default {
-  name: 'Home'
+  name: 'Home',
+  setup() {
+    onMounted(async() => {
+      try {
+        await projectsService.getProjects()
+      } catch (error) {
+        Pop.toast(error, 'error')
+      }
+    })
+    return {
+      projects: computed(() => AppState.projects)
+    }
+  }
 }
 </script>
 
