@@ -35,7 +35,7 @@ class NotesService {
   }
 
   async getNotes(projectId) {
-    const notes = await dbContext.Notes.find({ projectId })
+    const notes = await dbContext.Notes.find({ projectId }).populate('creator', 'name picture')
     return notes
   }
 }
