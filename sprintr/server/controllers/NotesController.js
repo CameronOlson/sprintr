@@ -7,8 +7,38 @@ export class NotesController extends BaseController {
     super('api/projects/:projectId/notes')
     this.router
       .get('', this.getNotes)
+      .get(':/noteId', this.getNoteById)
       .use(Auth0Provider.getAuthorizedUserInfo)
       .post('', this.createNote)
+      .put('/:noteId', this.editNote)
+      .delete('/:noteId', this.removeNote)
+  }
+
+  async removeNote(req, res, next) {
+    try {
+      const note = await notesService.removeNote(req.params.noteId, req.userInfo.id)
+      res.send(note)
+    } catch (error) {
+      next(error)
+    }
+  }
+
+  async getNoteById(req, res, next) {
+    try {
+      const note = await notesService.getNoteById(req.params.noteId)
+      res.send(note)
+    } catch (error) {
+      next(error)
+    }
+  }
+
+  async editNote(req, res, next) {
+    try {
+      const note = await notesService.editNote(req.params.noteId, req.userInfo.id, req.body)
+      res.send(note)
+    } catch (error) {
+      next(error)
+    }
   }
 
   async createNote(req, res, next) {
