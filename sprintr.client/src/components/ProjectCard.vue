@@ -1,11 +1,11 @@
 <template>
   <div class="card">
     <h5 class="card-header">
-      This is the name of the project
+      {{ project.name }}
     </h5>
     <div class="card-body">
       <p class="card-text">
-        this will be the description of the project Lorem ipsum dolor sit amet consectetur, adipisicing elit. Perferendis, repudiandae.
+        {{ project.description }}
       </p>
       <a href="#" class="btn btn-primary">Open Project</a>
     </div>
@@ -14,7 +14,12 @@
 
 <script>
 export default {
-
+  props: {
+    project: {
+      type: Object,
+      required: true
+    }
+  }
 }
 </script>
 
