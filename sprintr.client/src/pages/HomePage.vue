@@ -3,12 +3,25 @@
     <div class="card card-size m-3">
       <div class="card-body">
         <div class="card-title">
-          This is the card title
+          <button class=" btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#post-form">
+            Create Project
+          </button>
         </div>
         This will be where everything will go
       </div>
     </div>
   </div>
+
+  <footer>
+    <Modal id="post-form">
+      <template #modal-title>
+        <h4>Project Form</h4>
+      </template>
+      <template #modal-body>
+        <ProjectForm />
+      </template>
+    </Modal>
+  </footer>
 </template>
 
 <script>
