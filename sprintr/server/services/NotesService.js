@@ -22,7 +22,7 @@ class NotesService {
   }
 
   async getNoteById(noteId) {
-    const note = await dbContext.Notes.findById(noteId)
+    const note = await dbContext.Notes.findById(noteId).populate('creator', 'name picture')
     if (!note) {
       throw new BadRequest('no note found')
     }
