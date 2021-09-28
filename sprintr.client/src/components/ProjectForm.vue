@@ -1,16 +1,27 @@
 <template>
   <form @submit.prevent="createProject()">
     <div class="form-group">
-      <label for="title"></label>
-      <input type="text"
-             class="form-control bg-light"
-             placeholder="Project Name"
-      >
+      <label for="name">
+        <input type="text"
+               for="name"
+               class="form-control bg-light"
+               placeholder="Project Name"
+               v-model="editable.name"
+               required
+        >
+      </label>
     </div>
     <div class="input-group">
-      <div class="input-group-prepend">
-      </div>
-      <textarea class="form-control mt-2" placeholder="Project Description" aria-label="With textarea"></textarea>
+      <label for="description">
+        <textarea type="text"
+                  for="description"
+                  v-model="editable.description"
+                  class="form-control mt-2 bg-light"
+                  placeholder="Project Description"
+                  aria-label="With textarea"
+                  required
+        ></textarea>
+      </label>
     </div>
     <div class="form-group">
       <button type="submit" class="btn btn-success mt-2">
@@ -23,14 +34,17 @@
 <script>
 import Pop from '../utils/Pop'
 import { projectsService } from '../services/ProjectsService'
+import { ref } from '@vue/reactivity'
 
 export default {
 
   setup() {
+    const editable = ref({})
     return {
+      editable,
       async createProject() {
         try {
-          await projectsService.createProject()
+          await projectsService.createProject(editable.value)
         } catch (error) {
           Pop.toast('this is an error from the Project Form')
         }
