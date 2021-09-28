@@ -19,6 +19,8 @@ class BacklogItemsService {
     backlogItem.name = backlogItemData.name || backlogItem.name
     backlogItem.description = backlogItemData.description || backlogItem.description
     backlogItem.status = backlogItemData.status || backlogItem.status
+    backlogItem.sprintId = backlogItemData.sprintId || backlogItem.sprintId
+
     await backlogItem.save()
     return backlogItem
   }
@@ -31,8 +33,8 @@ class BacklogItemsService {
     return backlogItem
   }
 
-  async getBacklogItems() {
-    const backlogItems = await dbContext.BacklogItems.find()
+  async getBacklogItemsByProjectId(projectId) {
+    const backlogItems = await dbContext.BacklogItems.find({ projectId })
     if (!backlogItems) {
       throw new BadRequest('no matching BacklogItems')
     }

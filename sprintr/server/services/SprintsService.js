@@ -36,8 +36,8 @@ class SprintsService {
     return sprint
   }
 
-  async getSprints() {
-    const sprints = await dbContext.Sprints.find()
+  async getSprints(projectId) {
+    const sprints = await dbContext.Sprints.find({ projectId })
     if (!sprints) {
       throw new BadRequest('no sprints found')
     }

@@ -1,11 +1,11 @@
 import mongoose from 'mongoose'
 const Schema = mongoose.Schema
 
-export const SprintSchema = new Schema(
+export const NoteSchema = new Schema(
   {
-    name: { type: String, required: true },
-    startDate: { type: Date, required: true },
-    endDate: { type: Date, required: true },
+    body: { type: String, required: true },
+    // NOTE VVV this is the local field
+    backlogItemId: { type: Schema.Types.ObjectId, required: true, ref: 'BacklogItem' },
     projectId: { type: Schema.Types.ObjectId, ref: 'Project', required: true },
     creatorId: { type: Schema.Types.ObjectId, ref: 'Account', required: true }
   },
@@ -14,16 +14,22 @@ export const SprintSchema = new Schema(
     toJSON: { virtuals: true }
   }
 )
-
-SprintSchema.virtual('project', {
+NoteSchema.virtual('project', {
   localField: 'projectId',
   foreignField: '_id',
   ref: 'Project',
   justOne: true
 })
-SprintSchema.virtual('creator', {
+NoteSchema.virtual('creator', {
   localField: 'creatorId',
   foreignField: '_id',
   ref: 'Account',
+  justOne: true
+})
+NoteSchema.virtual('backlogItem', {
+  localField: 'backlogItemId',
+  //              vvv this is assigned when you get the Note
+  foreignField: '_id',
+  ref: 'BacklogItem',
   justOne: true
 })

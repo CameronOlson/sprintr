@@ -4,7 +4,7 @@ import BaseController from '../utils/BaseController.js'
 
 export class BacklogItemsController extends BaseController {
   constructor() {
-    super('api/projects/:projectId/backlogItems')
+    super('api/projects/:projectId/backlog')
     this.router
       .get('', this.getBacklogItems)
       .get('/:backlogItemId', this.getBacklogItemById)
@@ -34,8 +34,8 @@ export class BacklogItemsController extends BaseController {
 
   async createBacklogItem(req, res, next) {
     try {
-      req.body.creatorId = req.userInfo.id
       req.body.projectId = req.params.projectId
+      req.body.creatorId = req.userInfo.id
       const backlogItem = await backlogItemsService.createBacklogItem(req.body)
       res.send(backlogItem)
     } catch (error) {
@@ -54,7 +54,7 @@ export class BacklogItemsController extends BaseController {
 
   async getBacklogItems(req, res, next) {
     try {
-      const backlogItems = await backlogItemsService.getBacklogItems()
+      const backlogItems = await backlogItemsService.getBacklogItemsByProjectId(req.params.projectId)
       res.send(backlogItems)
     } catch (error) {
       next(error)
