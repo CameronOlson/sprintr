@@ -1,9 +1,14 @@
 <template>
   <div class="component">
     <div class="card">
-      <h5 class="card-header">
-        {{ backlogItem.name }}
-      </h5>
+      <span>
+        <h5 class="card-header">
+          {{ backlogItem.name }}
+        </h5>
+        <button @click="removeBacklogItem(backlogItem.id)">
+          Delete
+        </button>
+      </span>
       <div class="card-body">
         <h5 class="card-title">
           {{ backlogItem.description }}
@@ -31,6 +36,9 @@
 </template>
 
 <script>
+import { useRoute } from 'vue-router'
+import { backlogItemsService } from '../services/BacklogItemsService'
+import Pop from '../utils/Pop'
 export default {
   props: {
     backlogItem: {
@@ -39,7 +47,18 @@ export default {
     }
   },
   setup() {
-    return {}
+    const route = useRoute()
+
+    return {
+      async removeBacklogItem(backlogItemId) {
+        try {
+          await backlogItemsService.removeBacklogItem(route.params.id, backlogItemId)
+          Pop.toast('this has been removed')
+        } catch (error) {
+          Pop.toast('error', error)
+        }
+      }
+    }
   }
 }
 </script>
