@@ -50,7 +50,7 @@ export default {
           const sprintId = await sprintsService.createSprint(route.params.id, editable.value)
           router.push({
             name: 'Project.Sprint',
-            params: { id: sprintId }
+            params: { sprintId: sprintId }
           })
         } catch (error) {
 

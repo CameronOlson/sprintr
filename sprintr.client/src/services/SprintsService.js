@@ -15,5 +15,11 @@ class SprintsService {
     AppState.sprints.push(res.data)
     return res.data.id
   }
+
+  async getSprintById(projectId, sprintId) {
+    const res = await api.get('api/projects/' + projectId + '/sprints/' + sprintId)
+    logger.log('get single sprint res', res.data)
+    AppState.sprint = res.data
+  }
 }
 export const sprintsService = new SprintsService()
