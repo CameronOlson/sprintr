@@ -7,7 +7,13 @@
           <a class="nav-link active" aria-current="page">Backlog</a>
         </router-link>
       </li>
-      <SprintButton v-for="s in sprints" :key="s" :sprint="s" />
+      <SprintButton v-for="s in sprints" :key="s.id" :sprint="s" />
+      <li class="nav-item">
+        <a class="nav-link active selectable" data-bs-toggle="modal" data-bs-target="#sprint-form" aria-current="page">New Sprint
+          <i class="mdi mdi-plus">
+          </i>
+        </a>
+      </li>
     </ul>
     <div v-if="account.id == project.creatorId">
       <i class="mdi mdi-delete selectable" @click="deleteProject()"></i>
@@ -17,6 +23,16 @@
     loading
   </header>
   <router-view />
+  <footer>
+    <Modal id="sprint-form">
+      <template #modal-title>
+        <h4>Sprint Form</h4>
+      </template>
+      <template #modal-body>
+        <SprintForm />
+      </template>
+    </Modal>
+  </footer>
 </template>
 
 <script>
@@ -50,6 +66,13 @@ export default {
             name: 'Home'
           })
           Pop.toast('Project has been deleted, baby')
+        } catch (error) {
+          Pop.toast(error, 'error')
+        }
+      },
+      async createSprint() {
+        try {
+          await sprintsService.createSprint(route.params.id)
         } catch (error) {
           Pop.toast(error, 'error')
         }
