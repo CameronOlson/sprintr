@@ -1,5 +1,5 @@
 <template>
-  <form @submit.prevent="createBacklogItem()">
+  <form @submit="createBacklogItem()">
     <div class="form-group">
       <label for="name">
         <input type="text"
@@ -47,11 +47,7 @@ export default {
       route,
       async createBacklogItem() {
         try {
-          const projectId = await backlogItemsService.createBacklogItem(route.params.id, editable.value)
-          router.push({
-            name: 'Project.Backlog',
-            params: { id: projectId }
-          })
+          await backlogItemsService.createBacklogItem(route.params.id, editable.value)
         } catch (error) {
           Pop.toast('this is an error from the Backlog Item Form')
         }

@@ -6,7 +6,7 @@ class BacklogItemsService {
   async createBacklogItem(projectId, backlogItemData) {
     const res = await api.post('api/projects/' + projectId + '/backlog', backlogItemData)
     logger.log('create BLI res', res.data)
-    AppState.backlogItems = res.data
+    AppState.backlogItems.push(res.data)
   }
 
   async getBacklogItemsByProjectId(projectId) {

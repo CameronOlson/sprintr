@@ -6,7 +6,7 @@
       </button>
     </div>
   </div>
-  <BacklogItem v-for="b in backlogItems" :key="b" :backlog-item="b" />
+  <BacklogItem v-for="b in backlogItems" :key="b.id" :backlog-item="b" />
 
   <Modal id="backlog-form">
     <template #modal-title>
@@ -40,7 +40,9 @@ export default {
       }
     })
     return {
-      backlogItems: computed(() => AppState.backlogItems)
+      backlogItems: computed(() => AppState.backlogItems),
+      account: computed(() => AppState.account),
+      project: computed(() => AppState.project)
     }
   }
 }
