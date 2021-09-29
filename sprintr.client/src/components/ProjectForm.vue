@@ -35,16 +35,23 @@
 import Pop from '../utils/Pop'
 import { projectsService } from '../services/ProjectsService'
 import { ref } from '@vue/reactivity'
+import { useRouter } from 'vue-router'
 
 export default {
 
   setup() {
+    const router = useRouter()
     const editable = ref({})
     return {
       editable,
+      router,
       async createProject() {
         try {
-          await projectsService.createProject(editable.value)
+          const projectId = await projectsService.createProject(editable.value)
+          router.push({
+            name: 'Project.Backlog',
+            params: { id: projectId }
+          })
         } catch (error) {
           Pop.toast('this is an error from the Project Form')
         }

@@ -7,12 +7,11 @@
           <a class="nav-link active" aria-current="page">Backlog</a>
         </router-link>
       </li>
-      <li class="nav-item">
-        <router-link :to="{name: 'Project.Sprint'}">
-          <a class="nav-link active" aria-current="page">Sprint</a>
-        </router-link>
-      </li>
+      <SprintButton v-for="s in sprints" :key="s" :sprint="s" />
     </ul>
+    <div v-if="account.id == project.creatorId">
+      <i class="mdi mdi-delete selectable" @click="deleteProject()"></i>
+    </div>
   </header>
   <header v-else>
     loading
@@ -23,11 +22,13 @@
 <script>
 import { computed, onMounted, watchEffect } from '@vue/runtime-core'
 import { AppState } from '../AppState'
-import { useRoute } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
 import { projectsService } from '../services/ProjectsService'
+import { sprintsService } from '../services/SprintsService'
+import Pop from '../utils/Pop'
 export default {
-  name: 'Project',
   setup() {
+    const router = useRouter()
     const route = useRoute()
     onMounted(() => {
       AppState.project = null
@@ -35,10 +36,24 @@ export default {
     watchEffect(async() => {
       if (route.params.id) {
         await projectsService.getProjectById(route.params.id)
+        await sprintsService.getSprintsById(route.params.id)
       }
     })
     return {
-      project: computed(() => AppState.project)
+      project: computed(() => AppState.project),
+      sprints: computed(() => AppState.sprints),
+      account: computed(() => AppState.account),
+      async deleteProject() {
+        try {
+          await projectsService.deleteProject(route.params.id)
+          router.push({
+            name: 'Home'
+          })
+          Pop.toast('Project has been deleted, baby')
+        } catch (error) {
+          Pop.toast(error, 'error')
+        }
+      }
     }
   }
 }

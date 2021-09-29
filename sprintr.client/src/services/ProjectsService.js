@@ -8,6 +8,7 @@ class ProjectsService {
     const res = await api.post('api/projects', newProject)
     logger.log('res from project creation', res.data)
     AppState.projects.unshift(new Project(res.data))
+    return res.data.id
   }
 
   async getProjects() {
@@ -22,6 +23,12 @@ class ProjectsService {
     logger.log('this is the getProjectsById', res.data)
     AppState.project = res.data
     logger.log(AppState.project)
+  }
+
+  async deleteProject(projectId) {
+    const res = await api.delete('api/projects/' + projectId)
+    logger.log('delete project res', res)
+    AppState.projects = AppState.projects.filter(p => p.id !== projectId)
   }
 }
 export const projectsService = new ProjectsService()

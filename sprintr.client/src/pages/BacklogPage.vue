@@ -1,7 +1,4 @@
 <template>
-  <div class="component">
-    Hello From Backlog page
-  </div>
   <BacklogItem v-for="b in backlogItems" :key="b" :backlog-item="b" />
 </template>
 

@@ -3,7 +3,7 @@
     <div class="card card-size m-3">
       <div class="card-body">
         <div class="card-title">
-          <button class=" btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#post-form">
+          <button class=" btn btn-primary mb-2" type="button" data-bs-toggle="modal" data-bs-target="#post-form">
             Create Project
           </button>
           <div>
