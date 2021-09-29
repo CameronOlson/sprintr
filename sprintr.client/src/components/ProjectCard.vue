@@ -7,7 +7,9 @@
       <p class="card-text">
         {{ project.description }}
       </p>
-      <a href="#" class="btn btn-primary">Open Project</a>
+      <router-link :to="{name: 'Project.Backlog', params: {id: project.id}}" class="selectable">
+        <a href="#project" class="btn btn-primary">Open Project</a>
+      </router-link>
     </div>
   </div>
 </template>

@@ -70,5 +70,6 @@ export default {
 .card-size{
   height: 80vh;
   width: 80vw;
+  overflow: scroll;
 }
 </style>
