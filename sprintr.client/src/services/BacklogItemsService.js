@@ -3,6 +3,12 @@ import { logger } from '../utils/Logger'
 import { api } from './AxiosService'
 
 class BacklogItemsService {
+  async createBacklogItem(projectId, backlogItemData) {
+    const res = await api.post('api/projects/' + projectId + '/backlog', backlogItemData)
+    logger.log('create BLI res', res.data)
+    AppState.backlogItems = res.data
+  }
+
   async getBacklogItemsByProjectId(projectId) {
     const res = await api.get('api/projects/' + projectId + '/backlog')
     logger.log('this is the res from the BacklogItemsService client Side', res.data)
