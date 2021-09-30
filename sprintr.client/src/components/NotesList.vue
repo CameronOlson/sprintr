@@ -2,7 +2,7 @@
   <p v-if="note.backlogItemId === backlogItem.id">
     <img :src="note.creator.picture" alt="" class="small">
     {{ note.body }}
-    <a class="mdi mdi-delete" @click="removeNote()"></a>
+    <a class="mdi mdi-delete selectable" @click="removeNote()"></a>
   </p>
 </template>
 

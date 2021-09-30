@@ -49,13 +49,7 @@ export default {
       backlogItemId: props.backlogItem.id
     })
     const route = useRoute()
-    onMounted(async() => {
-      try {
-        await this.getNotes()
-      } catch (error) {
-        Pop.toast(error, 'error')
-      }
-    })
+
     return {
       editable,
       async pendingBacklogItemById(backlogItemId) {
@@ -97,13 +91,7 @@ export default {
           Pop.toast(error, 'error')
         }
       },
-      async getNotes() {
-        try {
-          await notesService.getNotes(route.params.id)
-        } catch (error) {
-          Pop.toast(error, 'error')
-        }
-      },
+
       notes: computed(() => AppState.notes)
     }
   }
