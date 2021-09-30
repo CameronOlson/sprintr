@@ -1,5 +1,6 @@
 <template>
   <p v-if="note.backlogItemId === backlogItem.id">
+    <img :src="note.creator.picture" alt="" class="small">
     {{ note.body }}
   </p>
 </template>
@@ -27,5 +28,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+
+.small{
+  height: 50px;
+  border-radius: 50%;
+}
 
 </style>
