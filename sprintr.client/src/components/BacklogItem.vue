@@ -83,7 +83,7 @@
       </template>
       <template #modal-body>
         <TaskForm :backlog-item="backlogItem" />
-        <Task v-for="t in tasks" :key="t.backlogItemId === backlogItem.id" :task="t" />
+        <Task v-for="t in tasks" :key="t.id" :task="t" :backlog-item="backlogItem" />
       </template>
     </Modal>
   </footer>
