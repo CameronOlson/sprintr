@@ -23,9 +23,7 @@ import { useRoute, useRouter } from 'vue-router'
 import { AppState } from '../AppState'
 import { sprintsService } from '../services/SprintsService'
 import Pop from '../utils/Pop'
-import { backlogItemsService } from '../services/BacklogItemsService'
-import { tasksService } from '../services/TasksService'
-import { notesService } from '../services/NotesService'
+
 export default {
   setup() {
     const router = useRouter()
