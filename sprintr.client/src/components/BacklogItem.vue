@@ -14,7 +14,7 @@
              data-bs-toggle="dropdown"
              aria-expanded="false"
           >
-            Dropdown link
+            Set Status
           </a>
 
           <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
@@ -37,7 +37,7 @@
                   aria-expanded="false"
                   @click="getSprintsById()"
           >
-            Dropdown button
+            Move to Sprint
           </button>
           <ul v-if="sprints" class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
             <SprintList v-for="s in sprints" :key="s.id" :sprint="s" :backlog-item="backlogItem" />
@@ -63,11 +63,14 @@
            aria-expanded="false"
            aria-controls="collapseExample1"
         >
-          Info
+          Tasks
         </a>
         <div class="collapse" id="collapseExample1">
           <div class="card card-body">
-            Some placeholder content for the collapse component. This panel is hidden by default but revealed when the user activates the relevant trigger.
+            <TaskForm :backlog-item="backlogItem" />
+            <ul>
+              <Task v-for="t in tasks" :key="t.id" :task="t" />
+            </ul>
           </div>
         </div>
       </div>
@@ -76,10 +79,11 @@
 </template>
 
 <script>
-import { computed, watchEffect } from '@vue/runtime-core'
+import { computed, onMounted, ref } from '@vue/runtime-core'
 import { useRoute } from 'vue-router'
 import { backlogItemsService } from '../services/BacklogItemsService'
 import { sprintsService } from '../services/SprintsService'
+import { tasksService } from '../services/TasksService'
 import Pop from '../utils/Pop'
 import { AppState } from '../AppState'
 export default {
@@ -90,17 +94,17 @@ export default {
     }
   },
   setup(props) {
+    const editable = ref({})
     const route = useRoute()
-    // watchEffect(async() => {
-    //   if (props.backlogItem.id) {
-    //     try {
-    //       await backlogItemsService.getBacklogItemsByProjectId(route.params.id)
-    //     } catch (error) {
-
-    //     }
-    //   }
-    // })
+    onMounted(async() => {
+      try {
+        await tasksService.getTasks(route.params.id, props.backlogItem.id)
+      } catch (error) {
+        Pop.toast(error, 'error')
+      }
+    })
     return {
+      editable,
       async getSprintsById() {
         try {
           await sprintsService.getSprintsById(route.params.id)
@@ -148,7 +152,9 @@ export default {
           Pop.toast(error, 'error')
         }
       },
-      sprints: computed(() => AppState.sprints)
+
+      sprints: computed(() => AppState.sprints),
+      tasks: computed(() => AppState.tasks)
     }
   }
 }
