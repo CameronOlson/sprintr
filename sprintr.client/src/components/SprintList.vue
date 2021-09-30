@@ -1,5 +1,5 @@
 <template>
-  <li>
+  <li @click="addBacklogItemToSprint">
     <a class="dropdown-item selectable">{{ sprint.name }}</a>
   </li>
 </template>
