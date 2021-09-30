@@ -29,6 +29,33 @@ class BacklogItemsService {
   async pendingBacklogItemById(projectId, backlogItemId) {
     const res = await api.put('api/projects/' + projectId + '/backlog/' + backlogItemId, { status: 'pending' })
     logger.log('add pending to the backlog item res', res.data)
+    const i = AppState.backlogItems.findIndex(b => b.backlogItemId === backlogItemId)
+    AppState.backlogItems.splice(i, 1, res.data)
+    AppState.backlogItems = [...AppState.backlogItems]
+  }
+
+  async inProgressBacklogItemById(projectId, backlogItemId) {
+    const res = await api.put('api/projects/' + projectId + '/backlog/' + backlogItemId, { status: 'in progress' })
+    logger.log('add inProgress to the backlog item res', res.data)
+    const i = AppState.backlogItems.findIndex(b => b.backlogItemId === backlogItemId)
+    AppState.backlogItems.splice(i, 1, res.data)
+    AppState.backlogItems = [...AppState.backlogItems]
+  }
+
+  async reviewBacklogItemById(projectId, backlogItemId) {
+    const res = await api.put('api/projects/' + projectId + '/backlog/' + backlogItemId, { status: 'review' })
+    logger.log('add review to the backlog item res', res.data)
+    const i = AppState.backlogItems.findIndex(b => b.backlogItemId === backlogItemId)
+    AppState.backlogItems.splice(i, 1, res.data)
+    AppState.backlogItems = [...AppState.backlogItems]
+  }
+
+  async doneBacklogItemById(projectId, backlogItemId) {
+    const res = await api.put('api/projects/' + projectId + '/backlog/' + backlogItemId, { status: 'done' })
+    logger.log('add Done to the backlog item res', res.data)
+    const i = AppState.backlogItems.findIndex(b => b.backlogItemId === backlogItemId)
+    AppState.backlogItems.splice(i, 1, res.data)
+    AppState.backlogItems = [...AppState.backlogItems]
   }
 }
 export const backlogItemsService = new BacklogItemsService()

@@ -5,6 +5,7 @@
         <h5 class="card-header">
           {{ backlogItem.name }}
         </h5>
+        <h6>{{ backlogItem.status }}</h6>
         <div class="dropdown">
           <a class="btn btn-secondary dropdown-toggle"
              href="#"
@@ -17,10 +18,10 @@
           </a>
 
           <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-            <li @click="pendingBacklogItemById(backlogItem.id)"><a class="dropdown-item" href="#">Pending</a></li>
-            <li @click="inProgressBacklogItemById(backlogItem.id)"><a class="dropdown-item" href="#">In-Progress</a></li>
-            <li @click="reviewBacklogItemById(backlogItem.id)"><a class="dropdown-item" href="#">Review</a></li>
-            <li @click="doneBacklogItemById(backlogItem.id)"><a class="dropdown-item" href="#">Done</a></li>
+            <li @click.prevent="pendingBacklogItemById(backlogItem.id)"><a class="dropdown-item">Pending</a></li>
+            <li @click.prevent="inProgressBacklogItemById(backlogItem.id)"><a class="dropdown-item">In-Progress</a></li>
+            <li @click.prevent="reviewBacklogItemById(backlogItem.id)"><a class="dropdown-item">Review</a></li>
+            <li @click.prevent="doneBacklogItemById(backlogItem.id)"><a class="dropdown-item">Done</a></li>
           </ul>
         </div>
         <button @click="removeBacklogItem(backlogItem.id)">
@@ -75,7 +76,7 @@
 </template>
 
 <script>
-import { computed } from '@vue/runtime-core'
+import { computed, watchEffect } from '@vue/runtime-core'
 import { useRoute } from 'vue-router'
 import { backlogItemsService } from '../services/BacklogItemsService'
 import { sprintsService } from '../services/SprintsService'
@@ -88,8 +89,17 @@ export default {
       required: true
     }
   },
-  setup() {
+  setup(props) {
     const route = useRoute()
+    // watchEffect(async() => {
+    //   if (props.backlogItem.id) {
+    //     try {
+    //       await backlogItemsService.getBacklogItemsByProjectId(route.params.id)
+    //     } catch (error) {
+
+    //     }
+    //   }
+    // })
     return {
       async getSprintsById() {
         try {
