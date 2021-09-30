@@ -15,15 +15,15 @@ export default {
     }
   },
   setup(props) {
-    // watchEffect(async() => {
-    //   if (AppState.tasks.length > 1) {
-    //     try {
-    //       await tasksService.findWeight(props.backlogItem.id)
-    //     } catch (error) {
-    //       Pop.toast(error, 'error')
-    //     }
-    //   }
-    // })
+    watchEffect(async() => {
+      // if (AppState.tasks.length) {
+      //   try {
+      //     await tasksService.findWeight(props.backlogItem.id)
+      //   } catch (error) {
+      //     Pop.toast(error, 'error')
+      //   }
+      // }
+    })
     return {
     }
   }

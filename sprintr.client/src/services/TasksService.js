@@ -15,19 +15,19 @@ class TasksService {
     AppState.tasks = res.data
   }
 
-  async findWeight(backlogItemId) {
-    const tasksArr = AppState.tasks
-    let sum = 0
-    for (let i = 0; i <= tasksArr.length; i++) {
-      const task = tasksArr[i]
+  // async findWeight(backlogItemId) {
+  //   const tasksArr = AppState.tasks
+  //   let sum = 0
+  //   for (let i = 0; i <= tasksArr.length; i++) {
+  //     const task = tasksArr[i]
 
-      if (task.backlogItemId === backlogItemId) {
-        sum += task.weight
-      }
-    }
-    logger.log('this is the findweight total', sum)
-    return sum
-  }
+  //     if (task.backlogItemId === backlogItemId) {
+  //       sum += task.weight
+  //     }
+  //   }
+  //   logger.log('this is the findweight total', sum)
+  //   return sum
+  // }
 
   async removeTask(projectId, taskId) {
     const res = await api.delete('api/projects/' + projectId + '/tasks/' + taskId)
@@ -37,12 +37,11 @@ class TasksService {
   }
 
   async toggleCheck(projectId, taskId, boolean) {
-    console.log(!boolean)
     boolean = !boolean
     const res = await api.put('api/projects/' + projectId + '/tasks/' + taskId, { isComplete: boolean })
     logger.log('check mark res', res.data.isComplete)
 
-    const i = AppState.tasks.findIndex(t => t.id === taskId)
+    const i = AppState.tasks.findIndex(t => t.taskId === taskId)
     AppState.tasks.splice(i, 1, res.data)
     AppState.tasks = [...AppState.tasks]
   }
