@@ -4,7 +4,6 @@
 
 <script>
 import { onMounted } from '@vue/runtime-core'
-import { AppState } from '../AppState'
 import Pop from '../utils/Pop'
 import { tasksService } from '../services/TasksService'
 export default {
@@ -17,7 +16,7 @@ export default {
   setup(props) {
     onMounted(async() => {
       try {
-        const sum = await tasksService.findWeight(props.backlogItem.id, AppState.tasks)
+        const sum = await tasksService.findWeight(props.backlogItem.id)
         return sum
       } catch (error) {
         Pop.toast(error, 'error')
