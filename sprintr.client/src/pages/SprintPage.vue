@@ -3,6 +3,11 @@
     <div class="row">
       <h1>{{ sprint.name }}</h1>
     </div>
+    <div>
+      <button v-if="account.id == sprint.creatorId" @click="deleteSprint()">
+        Delete Sprint
+      </button>
+    </div>
   </div>
   <div v-else class="container-fluid">
     <div class="row">
@@ -13,12 +18,13 @@
 
 <script>
 import { computed, onMounted, watchEffect } from '@vue/runtime-core'
-import { useRoute } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
 import { AppState } from '../AppState'
 import { sprintsService } from '../services/SprintsService'
 import Pop from '../utils/Pop'
 export default {
   setup() {
+    const router = useRouter()
     const route = useRoute()
     onMounted(() => {
       AppState.sprint = null
@@ -33,7 +39,19 @@ export default {
       }
     })
     return {
-      sprint: computed(() => AppState.sprint)
+      account: computed(() => AppState.account),
+      sprint: computed(() => AppState.sprint),
+      async deleteSprint() {
+        try {
+          if (await Pop.confirm) {
+            await sprintsService.deleteSprint(route.params.id, route.params.sprintId)
+            Pop.toast('this has been deleted')
+            router.push({ name: 'Project', params: { id: route.params.id } })
+          }
+        } catch (error) {
+          Pop.toast(error, 'error')
+        }
+      }
     }
   }
 }

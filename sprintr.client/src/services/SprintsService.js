@@ -21,5 +21,12 @@ class SprintsService {
     logger.log('get single sprint res', res.data)
     AppState.sprint = res.data
   }
+
+  async deleteSprint(projectId, sprintId) {
+    const res = await api.delete('api/projects/' + projectId + '/sprints/' + sprintId)
+    logger.log('this is the sprint delete', res)
+    AppState.sprints = AppState.sprints.filter(s => s.id !== sprintId)
+    AppState.sprint = null
+  }
 }
 export const sprintsService = new SprintsService()
