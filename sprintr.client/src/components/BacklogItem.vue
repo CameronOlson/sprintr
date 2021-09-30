@@ -136,38 +136,6 @@ export default {
           Pop.toast(error, 'error')
         }
       },
-      async pendingBacklogItemById(backlogItemId) {
-        try {
-          await backlogItemsService.pendingBacklogItemById(route.params.id, backlogItemId)
-          Pop.toast('status is pending')
-        } catch (error) {
-          Pop.toast(error, 'error')
-        }
-      },
-      async inProgressBacklogItemById(backlogItemId) {
-        try {
-          await backlogItemsService.inProgressBacklogItemById(route.params.id, backlogItemId)
-          Pop.toast('status is in progress')
-        } catch (error) {
-          Pop.toast(error, 'error')
-        }
-      },
-      async reviewBacklogItemById(backlogItemId) {
-        try {
-          await backlogItemsService.reviewBacklogItemById(route.params.id, backlogItemId)
-          Pop.toast('status is review')
-        } catch (error) {
-          Pop.toast(error, 'error')
-        }
-      },
-      async doneBacklogItemById(backlogItemId) {
-        try {
-          await backlogItemsService.doneBacklogItemById(route.params.id, backlogItemId)
-          Pop.toast('status is done')
-        } catch (error) {
-          Pop.toast(error, 'error')
-        }
-      },
 
       sprints: computed(() => AppState.sprints),
       tasks: computed(() => AppState.tasks)

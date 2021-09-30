@@ -1,8 +1,7 @@
 <template>
-  <div class="card">
-    <div class="card-body">
-    </div>
-  </div>
+  <p v-if="note.backlogItemId === backlogItem.id">
+    {{ note.body }}
+  </p>
 </template>
 
 <script>

@@ -1,5 +1,5 @@
 <template>
-  <form @submit.prevent="createDetails()">
+  <form @submit.prevent="createNote()">
     <span>
       <h3>{{}}</h3>
       <h6>{{ backlogItem.status }}</h6>
@@ -10,32 +10,34 @@
       <button @click.prevent="doneBacklogItemById(backlogItem.id)"><a class="dropdown-item">Done</a></button>
 
       <div class="form-group">
-        <label for="name">
+        <label for="body">
           <input type="text"
-                 for="name"
+                 for="body"
                  class="form-control bg-light"
                  placeholder="Add Note"
+                 v-model="editable.body"
           >
         </label>
       </div>
+      <button type="submit" class="mdi mdi-send">
+      </button>
     </span>
     <span>
 
     </span>
-    <button type="submit" class="mdi mdi-send">
-    </button>
-    <div class="row">
-      <NotesList n-for="n in notes" :key="n.id" :note="n" :backlog-item="backlogItem" />
-      <div class="card-Body">
-      </div>
-    </div>
+    Notes
+    <NotesList v-for="n in notes" :key="n.id" :note="n" :backlog-item="backlogItem" />
   </form>
 </template>
 
 <script>
+import { ref } from '@vue/reactivity'
 import { useRoute } from 'vue-router'
 import { backlogItemsService } from '../services/BacklogItemsService'
+import { notesService } from '../services/NotesService'
 import Pop from '../utils/Pop'
+import { computed, onMounted } from '@vue/runtime-core'
+import { AppState } from '../AppState'
 export default {
   props: {
     backlogItem: {
@@ -43,9 +45,20 @@ export default {
       required: true
     }
   },
-  setup() {
+  setup(props) {
+    const editable = ref({
+      backlogItemId: props.backlogItem.id
+    })
     const route = useRoute()
+    onMounted(async() => {
+      try {
+        await this.getNotes()
+      } catch (error) {
+        Pop.toast(error, 'error')
+      }
+    })
     return {
+      editable,
       async pendingBacklogItemById(backlogItemId) {
         try {
           await backlogItemsService.pendingBacklogItemById(route.params.id, backlogItemId)
@@ -77,7 +90,22 @@ export default {
         } catch (error) {
           Pop.toast(error, 'error')
         }
-      }
+      },
+      async createNote() {
+        try {
+          await notesService.createNote(route.params.id, editable.value)
+        } catch (error) {
+          Pop.toast(error, 'error')
+        }
+      },
+      async getNotes() {
+        try {
+          await notesService.getNotes(route.params.id)
+        } catch (error) {
+          Pop.toast(error, 'error')
+        }
+      },
+      notes: computed(() => AppState.notes)
     }
   }
 }
