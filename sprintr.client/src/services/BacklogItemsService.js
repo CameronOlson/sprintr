@@ -20,5 +20,10 @@ class BacklogItemsService {
     logger.log('this is the res from the remove backlog items', res)
     AppState.backlogItems = AppState.backlogItems.filter(b => b.id !== backlogItemId)
   }
+
+  async addBacklogItemToSprint(sprintId, backlogItemId, projectId) {
+    const res = await api.put('api/projects/' + projectId + '/backlog/' + backlogItemId, sprintId)
+    logger.log('add BLI to sprint res', res)
+  }
 }
 export const backlogItemsService = new BacklogItemsService()

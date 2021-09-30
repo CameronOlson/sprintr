@@ -21,7 +21,7 @@
             Dropdown button
           </button>
           <ul v-if="sprints" class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-            <SprintList v-for="s in sprints" :key="s.id" :sprint="s" />
+            <SprintList v-for="s in sprints" :key="s.id" :sprint="s" :backlog-item="backlogItem" />
           </ul>
           <ul v-else class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
             <li>
