@@ -1,7 +1,5 @@
 <template>
-  <div class="component">
-    <li> {{ task.name }} Weight: {{ task.weight }}</li>
-  </div>
+  <li> {{ task.name }} Weight: {{ task.weight }}</li>
 </template>
 
 <script>

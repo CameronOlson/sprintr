@@ -57,25 +57,36 @@
           {{ backlogItem.status }}
         </p>
         <a class="btn btn-primary"
-           data-bs-toggle="collapse"
            href="#collapseExample1"
            role="button"
            aria-expanded="false"
            aria-controls="collapseExample1"
+           :data-bs-target="'#task-modal-' + backlogItem.id"
+           data-bs-toggle="modal"
         >
+          >
           Tasks
         </a>
         <div class="collapse" id="collapseExample1">
           <div class="card card-body">
-            <TaskForm :backlog-item="backlogItem" />
             <ul>
-              <Task v-for="t in tasks" :key="t.id" :task="t" />
             </ul>
           </div>
         </div>
       </div>
     </div>
   </div>
+  <footer>
+    <Modal :id="'task-modal-' + backlogItem.id">
+      <template #modal-title>
+        {{ backlogItem.name }}
+      </template>
+      <template #modal-body>
+        <TaskForm :backlog-item="backlogItem" />
+        <Task v-for="t in tasks" :key="t.id" :task="t" />
+      </template>
+    </Modal>
+  </footer>
 </template>
 
 <script>
@@ -93,12 +104,12 @@ export default {
       required: true
     }
   },
-  setup(props) {
+  setup() {
     const editable = ref({})
     const route = useRoute()
     onMounted(async() => {
       try {
-        await tasksService.getTasks(route.params.id, props.backlogItem.id)
+        await tasksService.getTasks(route.params.id)
       } catch (error) {
         Pop.toast(error, 'error')
       }
