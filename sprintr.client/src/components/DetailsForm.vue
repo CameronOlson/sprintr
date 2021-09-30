@@ -1,7 +1,6 @@
 <template>
   <form @submit.prevent="createNote()">
     <span>
-      <h3>{{}}</h3>
       <h6>{{ backlogItem.status }}</h6>
 
       <button @click.prevent="pendingBacklogItemById(backlogItem.id)"><a class="dropdown-item">Pending</a></button>
