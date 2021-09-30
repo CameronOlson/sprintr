@@ -11,8 +11,8 @@
         <input type="date"
                id="start"
                name="trip-start"
-               min="2018-01-01"
-               max="2018-12-31"
+               min="2021-01-01"
+               max="2030-12-31"
                v-model="editable.startDate"
         >
       </span>
@@ -20,8 +20,8 @@
         <input type="date"
                id="start"
                name="trip-start"
-               min="2018-01-01"
-               max="2018-12-31"
+               min="2021-01-02"
+               max="2030-12-31"
                v-model="editable.endDate"
         >
       </span>

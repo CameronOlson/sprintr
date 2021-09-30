@@ -36,6 +36,7 @@ import Pop from '../utils/Pop'
 import { projectsService } from '../services/ProjectsService'
 import { ref } from '@vue/reactivity'
 import { useRouter } from 'vue-router'
+import { Modal } from 'bootstrap'
 
 export default {
 
@@ -48,6 +49,8 @@ export default {
       async createProject() {
         try {
           const projectId = await projectsService.createProject(editable.value)
+          const modal = Modal.getInstance(document.getElementById('post-form'))
+          modal.hide()
           router.push({
             name: 'Project.Backlog',
             params: { id: projectId }
