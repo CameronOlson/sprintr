@@ -1,13 +1,13 @@
 <template>
   <li v-if="task.backlogItemId === backlogItem.id">
-    <input type="checkbox" @click.prevent="toggleCheck()">
+    <input type="checkbox" @click.prevent="toggleCheck()" :checked="editable">
     {{ task.name }} Weight: {{ task.weight }} <i v-if="account.id === task.creatorId" @click="removeTask()" class="mdi mdi-delete selectable"></i>
   </li>
 <!-- v-if="task.isComplete ? 'checked' : ''" -->
 </template>
 
 <script>
-import { computed } from '@vue/runtime-core'
+import { computed, ref } from '@vue/runtime-core'
 import { AppState } from '../AppState'
 import { tasksService } from '../services/TasksService'
 import { useRoute } from 'vue-router'
@@ -24,13 +24,15 @@ export default {
     }
   },
   setup(props) {
+    const editable = ref(props.task.isComplete)
     const route = useRoute()
     return {
+      editable,
       account: computed(() => AppState.account),
       async removeTask() {
         try {
           if (await Pop.confirm) {
-            await tasksService.removeTask(route.params.id, props.task.id, props.task.isComplete)
+            await tasksService.removeTask(route.params.id, props.task.id)
           }
         } catch (error) {
           Pop.toast(error, 'error')
@@ -38,7 +40,7 @@ export default {
       },
       async toggleCheck() {
         try {
-          await tasksService.toggleCheck(route.params.id, props.task.id)
+          await tasksService.toggleCheck(route.params.id, props.task.id, props.task.isComplete)
         } catch (error) {
           Pop.toast(error, 'error')
         }

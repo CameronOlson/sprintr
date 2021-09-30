@@ -9,7 +9,7 @@ class TasksService {
     }
     task.name = taskData.name || task.name
     task.weight = taskData.weight || task.weight
-    task.isComplete = taskData.isComplete || task.isComplete
+    task.isComplete = taskData.isComplete !== null ? taskData.isComplete : task.isComplete
     await task.save()
     return task
   }

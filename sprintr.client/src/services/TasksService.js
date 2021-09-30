@@ -37,12 +37,12 @@ class TasksService {
   }
 
   async toggleCheck(projectId, taskId, boolean) {
-    if (boolean === true) {
-      boolean = false
-    } else boolean = true
+    console.log(!boolean)
+    boolean = !boolean
     const res = await api.put('api/projects/' + projectId + '/tasks/' + taskId, { isComplete: boolean })
     logger.log('check mark res', res.data.isComplete)
-    const i = AppState.tasks.findIndex(t => t.taskId === taskId)
+
+    const i = AppState.tasks.findIndex(t => t.id === taskId)
     AppState.tasks.splice(i, 1, res.data)
     AppState.tasks = [...AppState.tasks]
   }
