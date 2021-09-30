@@ -29,6 +29,7 @@ export default {
     const route = useRoute()
     onMounted(() => {
       AppState.sprint = null
+      AppState.backlogItems = null
     })
     watchEffect(async() => {
       if (route.params.sprintId) {
@@ -43,6 +44,7 @@ export default {
     return {
       account: computed(() => AppState.account),
       sprint: computed(() => AppState.sprint),
+      backlogItems: computed(() => AppState.backlogItems),
       async deleteSprint() {
         try {
           if (await Pop.confirm) {

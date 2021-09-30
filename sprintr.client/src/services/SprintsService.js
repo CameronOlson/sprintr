@@ -28,5 +28,11 @@ class SprintsService {
     AppState.sprints = AppState.sprints.filter(s => s.id !== sprintId)
     AppState.sprint = null
   }
+
+  async getBacklogItemsBySprintId(projectId, sprintId) {
+    const res = await api.get('api/projects/' + projectId + '/backlog')
+    logger.log('res from get backlogs by sprintId', res.data)
+    AppState.backlogItems = AppState.backlogItems.filter(b => b.sprintId === sprintId)
+  }
 }
 export const sprintsService = new SprintsService()
