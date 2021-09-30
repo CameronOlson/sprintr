@@ -22,8 +22,8 @@ class BacklogItemsService {
   }
 
   async addBacklogItemToSprint(sprintId, backlogItemId, projectId) {
-    const res = await api.put('api/projects/' + projectId + '/backlog/' + backlogItemId, sprintId)
-    logger.log('add BLI to sprint res', res)
+    const res = await api.put('api/projects/' + projectId + '/backlog/' + backlogItemId, { sprintId: sprintId })
+    logger.log('add BLI to sprint res', res.data)
   }
 }
 export const backlogItemsService = new BacklogItemsService()

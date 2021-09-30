@@ -14,6 +14,7 @@
       <h1>LOADING</h1>
     </div>
   </div>
+  <BacklogItem v-for="b in backlogItems" :key="b.id" :backlog-item="b" />
 </template>
 
 <script>
@@ -33,6 +34,7 @@ export default {
       if (route.params.sprintId) {
         try {
           await sprintsService.getSprintById(route.params.id, route.params.sprintId)
+          await sprintsService.getBacklogItemsBySprintId(route.params.id, route.params.sprintId)
         } catch (error) {
           Pop.toast(error, 'error')
         }
