@@ -14,5 +14,11 @@ class NotesService {
     logger.log('get notes', res.data)
     AppState.notes = res.data
   }
+
+  async removeNote(projectId, noteId) {
+    const res = await api.delete('api/projects/' + projectId + '/notes/' + noteId)
+    logger.log('res from remove note', res.data)
+    AppState.notes = AppState.notes.filter(n => n.id !== noteId)
+  }
 }
 export const notesService = new NotesService()
