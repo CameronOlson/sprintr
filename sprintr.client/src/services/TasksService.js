@@ -11,15 +11,29 @@ class TasksService {
 
   async getTasks(projectId) {
     const res = await api.get('api/projects/' + projectId + '/tasks/')
-    logger.log('get tasks', res.data)
+    logger.log('this is getting tasks from TasksService', res.data)
     AppState.tasks = res.data
   }
 
+<<<<<<< HEAD
+  async findWeight(backlogItemId, tasksArr) {
+    let sum = 0
+    for (let i = 0; i <= tasksArr.length; i++) {
+      const task = tasksArr[i]
+
+      if (task.backlogItemId === backlogItemId) {
+        sum += task.weight
+      }
+    }
+    logger.log('this is the findweight total', sum)
+    return sum
+=======
   async removeTask(projectId, taskId) {
     const res = await api.delete('api/projects/' + projectId + '/tasks/' + taskId)
     logger.log('remove this task', res.data)
 
     AppState.tasks = AppState.tasks.filter(t => t.id !== taskId)
+>>>>>>> aa010ea07e6755c49e6e164d87dacf48698bdb52
   }
 }
 export const tasksService = new TasksService()

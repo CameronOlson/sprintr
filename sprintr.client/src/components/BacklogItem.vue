@@ -3,7 +3,8 @@
     <div class="card my-3">
       <span>
         <h5 class="card-header">
-          {{ backlogItem.name }}
+          <span>{{ backlogItem.name }}</span>
+          <span> <TaskWeight :backlog-item="backlogItem" /> </span>
         </h5>
         <div class="dropdown">
           <a class="btn btn-primary"
