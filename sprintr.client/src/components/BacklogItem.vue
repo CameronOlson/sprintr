@@ -100,6 +100,7 @@ import { useRoute } from 'vue-router'
 import { backlogItemsService } from '../services/BacklogItemsService'
 import { sprintsService } from '../services/SprintsService'
 import { tasksService } from '../services/TasksService'
+import { notesService } from '../services/NotesService'
 import Pop from '../utils/Pop'
 import { AppState } from '../AppState'
 export default {
@@ -115,6 +116,7 @@ export default {
     onMounted(async() => {
       try {
         await tasksService.getTasks(route.params.id)
+        await notesService.getNotes(route.params.id)
       } catch (error) {
         Pop.toast(error, 'error')
       }
