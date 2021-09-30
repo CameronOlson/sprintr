@@ -61,11 +61,13 @@ export default {
       account: computed(() => AppState.account),
       async deleteProject() {
         try {
-          await projectsService.deleteProject(route.params.id)
-          router.push({
-            name: 'Home'
-          })
-          Pop.toast('Project has been deleted, baby')
+          if (await Pop.confirm()) {
+            await projectsService.deleteProject(route.params.id)
+            router.push({
+              name: 'Home'
+            })
+            Pop.toast('Project has been deleted, baby')
+          }
         } catch (error) {
           Pop.toast(error, 'error')
         }
