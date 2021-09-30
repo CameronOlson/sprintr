@@ -40,7 +40,7 @@ export default {
       },
       async toggleCheck() {
         try {
-          await tasksService.toggleCheck(route.params.id, props.task.id, props.task.isComplete)
+          await tasksService.toggleCheck(route.params.id, props.task.id, props.task)
         } catch (error) {
           Pop.toast(error, 'error')
         }
