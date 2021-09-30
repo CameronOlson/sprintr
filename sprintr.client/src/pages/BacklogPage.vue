@@ -1,12 +1,16 @@
 <template>
   <div class="container-fluid">
     <div class="row">
-      <button class=" btn btn-primary mb-2" type="button" data-bs-toggle="modal" data-bs-target="#backlog-form">
-        Add Item
-      </button>
+      <div class="col-12">
+        <button class=" btn btn-primary mb-2" type="button" data-bs-toggle="modal" data-bs-target="#backlog-form">
+          Add Item
+        </button>
+      </div>
     </div>
   </div>
-  <BacklogItem v-for="b in backlogItems" :key="b.id" :backlog-item="b" />
+  <div class="row">
+    <BacklogItem v-for="b in backlogItems" :key="b.id" :backlog-item="b" />
+  </div>
 
   <Modal id="backlog-form">
     <template #modal-title>

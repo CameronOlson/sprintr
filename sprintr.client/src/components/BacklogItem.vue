@@ -1,13 +1,47 @@
 <template>
   <div class="component">
-    <div class="card my-3">
-      <span>
-        <h5 class="card-header">
-          <span>{{ backlogItem.name }}</span>
-          <span> <TaskWeight :backlog-item="backlogItem" /> </span>
+    <div class="col-10 m-auto">
+      <div class="card my-3 p-3">
+        <div class="card-header text-center">
+          <span>
+            <h2>
+              {{ backlogItem.name }}
+            </h2>
+            <p class="card-text">
+              {{ backlogItem.status }}
+            </p>
+          </span>
+        </div>
+        <div class="d-flex justify-content-space-between">
+          <a class="mdi mdi-delete selectable f-20" @click="removeBacklogItem(backlogItem.id)">
+          </a>
+          <div class="dropdown">
+            <button class="card-link dropdown-toggle"
+                    type="button"
+                    id="dropdownMenuButton1"
+                    data-bs-toggle="dropdown"
+                    aria-expanded="false"
+                    @click="getSprintsById()"
+            >
+              Move to Sprint
+            </button>
+            <ul v-if="sprints" class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+              <SprintList v-for="s in sprints" :key="s.id" :sprint="s" :backlog-item="backlogItem" />
+            </ul>
+            <ul v-else class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+              <li>
+                Loading...
+              </li>
+            </ul>
+          </div>
+        </div>
+        <h5 class="card-title">
+          {{ backlogItem.description }}
         </h5>
+        <TaskWeight :backlog-item="backlogItem" />
+
         <div class="dropdown">
-          <a class="btn btn-primary"
+          <a class="card-link"
              href="#collapseExample1"
              role="button"
              aria-expanded="false"
@@ -19,55 +53,25 @@
           </a>
 
           <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+          </ul>
+        </div>
 
-          </ul>
-        </div>
-        <button @click="removeBacklogItem(backlogItem.id)">
-          Delete
-        </button>
-      </span>
-      <span>
-        <div class="dropdown">
-          <button class="btn btn-secondary dropdown-toggle"
-                  type="button"
-                  id="dropdownMenuButton1"
-                  data-bs-toggle="dropdown"
-                  aria-expanded="false"
-                  @click="getSprintsById()"
+        <div class="card-body">
+          <a class="card-link"
+             href="#collapseExample1"
+             role="button"
+             aria-expanded="false"
+             aria-controls="collapseExample1"
+             :data-bs-target="'#task-modal-' + backlogItem.id"
+             data-bs-toggle="modal"
           >
-            Move to Sprint
-          </button>
-          <ul v-if="sprints" class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-            <SprintList v-for="s in sprints" :key="s.id" :sprint="s" :backlog-item="backlogItem" />
-          </ul>
-          <ul v-else class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-            <li>
-              Loading...
-            </li>
-          </ul>
-        </div>
-      </span>
-      <div class="card-body">
-        <h5 class="card-title">
-          {{ backlogItem.description }}
-        </h5>
-        <p class="card-text">
-          {{ backlogItem.status }}
-        </p>
-        <a class="btn btn-primary"
-           href="#collapseExample1"
-           role="button"
-           aria-expanded="false"
-           aria-controls="collapseExample1"
-           :data-bs-target="'#task-modal-' + backlogItem.id"
-           data-bs-toggle="modal"
-        >
-          Tasks
-        </a>
-        <div class="collapse" id="collapseExample1">
-          <div class="card card-body">
-            <ul>
-            </ul>
+            Tasks
+          </a>
+          <div class="collapse" id="collapseExample1">
+            <div class="card card-body">
+              <ul>
+              </ul>
+            </div>
           </div>
         </div>
       </div>
