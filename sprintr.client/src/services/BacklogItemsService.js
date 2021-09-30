@@ -25,5 +25,10 @@ class BacklogItemsService {
     const res = await api.put('api/projects/' + projectId + '/backlog/' + backlogItemId, sprintId)
     logger.log('add BLI to sprint res', res)
   }
+
+  async pendingBacklogItemById(projectId, backlogItemId) {
+    const res = await api.put('api/projects/' + projectId + '/backlog/' + backlogItemId, { status: 'pending' })
+    logger.log('add pending to the backlog item res', res.data)
+  }
 }
 export const backlogItemsService = new BacklogItemsService()

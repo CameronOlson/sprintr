@@ -5,6 +5,24 @@
         <h5 class="card-header">
           {{ backlogItem.name }}
         </h5>
+        <div class="dropdown">
+          <a class="btn btn-secondary dropdown-toggle"
+             href="#"
+             role="button"
+             id="dropdownMenuLink"
+             data-bs-toggle="dropdown"
+             aria-expanded="false"
+          >
+            Dropdown link
+          </a>
+
+          <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+            <li @click="pendingBacklogItemById(backlogItem.id)"><a class="dropdown-item" href="#">Pending</a></li>
+            <li @click="inProgressBacklogItemById(backlogItem.id)"><a class="dropdown-item" href="#">In-Progress</a></li>
+            <li @click="reviewBacklogItemById(backlogItem.id)"><a class="dropdown-item" href="#">Review</a></li>
+            <li @click="doneBacklogItemById(backlogItem.id)"><a class="dropdown-item" href="#">Done</a></li>
+          </ul>
+        </div>
         <button @click="removeBacklogItem(backlogItem.id)">
           Delete
         </button>
@@ -84,6 +102,38 @@ export default {
         try {
           await backlogItemsService.removeBacklogItem(route.params.id, backlogItemId)
           Pop.toast('this has been removed')
+        } catch (error) {
+          Pop.toast(error, 'error')
+        }
+      },
+      async pendingBacklogItemById(backlogItemId) {
+        try {
+          await backlogItemsService.pendingBacklogItemById(route.params.id, backlogItemId)
+          Pop.toast('status is pending')
+        } catch (error) {
+          Pop.toast(error, 'error')
+        }
+      },
+      async inProgressBacklogItemById(backlogItemId) {
+        try {
+          await backlogItemsService.inProgressBacklogItemById(route.params.id, backlogItemId)
+          Pop.toast('status is in progress')
+        } catch (error) {
+          Pop.toast(error, 'error')
+        }
+      },
+      async reviewBacklogItemById(backlogItemId) {
+        try {
+          await backlogItemsService.reviewBacklogItemById(route.params.id, backlogItemId)
+          Pop.toast('status is review')
+        } catch (error) {
+          Pop.toast(error, 'error')
+        }
+      },
+      async doneBacklogItemById(backlogItemId) {
+        try {
+          await backlogItemsService.doneBacklogItemById(route.params.id, backlogItemId)
+          Pop.toast('status is done')
         } catch (error) {
           Pop.toast(error, 'error')
         }
