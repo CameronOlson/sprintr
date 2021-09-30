@@ -15,6 +15,7 @@ class TasksService {
     AppState.tasks = res.data
   }
 
+<<<<<<< HEAD
   async findWeight(backlogItemId, tasksArr) {
     let sum = 0
     for (let i = 0; i <= tasksArr.length; i++) {
@@ -26,6 +27,13 @@ class TasksService {
     }
     logger.log('this is the findweight total', sum)
     return sum
+=======
+  async removeTask(projectId, taskId) {
+    const res = await api.delete('api/projects/' + projectId + '/tasks/' + taskId)
+    logger.log('remove this task', res.dta)
+
+    AppState.tasks = AppState.tasks.filter(t => t.id !== taskId)
+>>>>>>> aa010ea07e6755c49e6e164d87dacf48698bdb52
   }
 }
 export const tasksService = new TasksService()

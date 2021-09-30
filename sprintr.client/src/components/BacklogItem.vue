@@ -6,23 +6,20 @@
           <span>{{ backlogItem.name }}</span>
           <span> <TaskWeight :backlog-item="backlogItem" /> </span>
         </h5>
-        <h6>{{ backlogItem.status }}</h6>
         <div class="dropdown">
-          <a class="btn btn-secondary dropdown-toggle"
-             href="#"
+          <a class="btn btn-primary"
+             href="#collapseExample1"
              role="button"
-             id="dropdownMenuLink"
-             data-bs-toggle="dropdown"
              aria-expanded="false"
+             aria-controls="collapseExample1"
+             :data-bs-target="'#details-modal-' + backlogItem.id"
+             data-bs-toggle="modal"
           >
-            Set Status
+            Details
           </a>
 
           <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-            <li @click.prevent="pendingBacklogItemById(backlogItem.id)"><a class="dropdown-item">Pending</a></li>
-            <li @click.prevent="inProgressBacklogItemById(backlogItem.id)"><a class="dropdown-item">In-Progress</a></li>
-            <li @click.prevent="reviewBacklogItemById(backlogItem.id)"><a class="dropdown-item">Review</a></li>
-            <li @click.prevent="doneBacklogItemById(backlogItem.id)"><a class="dropdown-item">Done</a></li>
+
           </ul>
         </div>
         <button @click="removeBacklogItem(backlogItem.id)">
@@ -65,7 +62,7 @@
            :data-bs-target="'#task-modal-' + backlogItem.id"
            data-bs-toggle="modal"
         >
-          > Tasks
+          Tasks
         </a>
         <div class="collapse" id="collapseExample1">
           <div class="card card-body">
@@ -84,6 +81,14 @@
       <template #modal-body>
         <TaskForm :backlog-item="backlogItem" />
         <Task v-for="t in tasks" :key="t.id" :task="t" :backlog-item="backlogItem" />
+      </template>
+    </Modal>
+    <Modal :id="'details-modal-' + backlogItem.id">
+      <template #modal-title>
+        {{ backlogItem.name }} Details
+      </template>
+      <template #modal-body>
+        <DetailsForm :backlog-item="backlogItem" />
       </template>
     </Modal>
   </footer>

@@ -9,5 +9,6 @@ export const AppState = reactive({
   backlogItems: [],
   sprints: [],
   sprint: null,
-  tasks: []
+  tasks: [],
+  notes: []
 })
