@@ -1,6 +1,6 @@
 <template>
   <div class="component">
-    <div class="card">
+    <div class="card my-3">
       <span>
         <h5 class="card-header">
           {{ backlogItem.name }}
@@ -64,8 +64,7 @@
            :data-bs-target="'#task-modal-' + backlogItem.id"
            data-bs-toggle="modal"
         >
-          >
-          Tasks
+          > Tasks
         </a>
         <div class="collapse" id="collapseExample1">
           <div class="card card-body">
