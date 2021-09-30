@@ -8,7 +8,7 @@
         </router-link>
       </li>
       <SprintButton v-for="s in sprints" :key="s.id" :sprint="s" />
-      <li class="nav-item">
+      <li class="nav-item" v-if="account.id == project.creatorId">
         <a class="nav-link active selectable" data-bs-toggle="modal" data-bs-target="#sprint-form" aria-current="page">New Sprint
           <i class="mdi mdi-plus">
           </i>

@@ -9,6 +9,27 @@
           Delete
         </button>
       </span>
+      <span>
+        <div class="dropdown">
+          <button class="btn btn-secondary dropdown-toggle"
+                  type="button"
+                  id="dropdownMenuButton1"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                  @click="getSprintsById()"
+          >
+            Dropdown button
+          </button>
+          <ul v-if="sprints" class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+            <SprintList v-for="s in sprints" :key="s.id" :sprint="s" />
+          </ul>
+          <ul v-else class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+            <li>
+              Loading...
+            </li>
+          </ul>
+        </div>
+      </span>
       <div class="card-body">
         <h5 class="card-title">
           {{ backlogItem.description }}
@@ -36,9 +57,12 @@
 </template>
 
 <script>
+import { computed } from '@vue/runtime-core'
 import { useRoute } from 'vue-router'
 import { backlogItemsService } from '../services/BacklogItemsService'
+import { sprintsService } from '../services/SprintsService'
 import Pop from '../utils/Pop'
+import { AppState } from '../AppState'
 export default {
   props: {
     backlogItem: {
@@ -48,16 +72,23 @@ export default {
   },
   setup() {
     const route = useRoute()
-
     return {
+      async getSprintsById() {
+        try {
+          await sprintsService.getSprintsById(route.params.id)
+        } catch (error) {
+          Pop.toast(error, 'error')
+        }
+      },
       async removeBacklogItem(backlogItemId) {
         try {
           await backlogItemsService.removeBacklogItem(route.params.id, backlogItemId)
           Pop.toast('this has been removed')
         } catch (error) {
-          Pop.toast('error', error)
+          Pop.toast(error, 'error')
         }
-      }
+      },
+      sprints: computed(() => AppState.sprints)
     }
   }
 }
