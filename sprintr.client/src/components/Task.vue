@@ -1,7 +1,9 @@
 <template>
   <li v-if="task.backlogItemId === backlogItem.id">
+    <input type="checkbox" @click.prevent="toggleCheck()">
     {{ task.name }} Weight: {{ task.weight }} <i v-if="account.id === task.creatorId" @click="removeTask()" class="mdi mdi-delete selectable"></i>
   </li>
+<!-- v-if="task.isComplete ? 'checked' : ''" -->
 </template>
 
 <script>
@@ -28,8 +30,15 @@ export default {
       async removeTask() {
         try {
           if (await Pop.confirm) {
-            await tasksService.removeTask(route.params.id, props.task.id)
+            await tasksService.removeTask(route.params.id, props.task.id, props.task.isComplete)
           }
+        } catch (error) {
+          Pop.toast(error, 'error')
+        }
+      },
+      async toggleCheck() {
+        try {
+          await tasksService.toggleCheck(route.params.id, props.task.id)
         } catch (error) {
           Pop.toast(error, 'error')
         }

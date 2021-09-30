@@ -16,7 +16,6 @@ class TasksService {
   }
 
   async findWeight(backlogItemId) {
-    debugger
     const tasksArr = AppState.tasks
     let sum = 0
     for (let i = 0; i <= tasksArr.length; i++) {
@@ -35,6 +34,17 @@ class TasksService {
     logger.log('remove this task', res.data)
 
     AppState.tasks = AppState.tasks.filter(t => t.id !== taskId)
+  }
+
+  async toggleCheck(projectId, taskId, boolean) {
+    if (boolean === true) {
+      boolean = false
+    } else boolean = true
+    const res = await api.put('api/projects/' + projectId + '/tasks/' + taskId, { isComplete: boolean })
+    logger.log('check mark res', res.data.isComplete)
+    const i = AppState.tasks.findIndex(t => t.taskId === taskId)
+    AppState.tasks.splice(i, 1, res.data)
+    AppState.tasks = [...AppState.tasks]
   }
 }
 export const tasksService = new TasksService()
