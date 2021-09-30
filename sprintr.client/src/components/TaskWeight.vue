@@ -23,15 +23,15 @@ export default {
     //     Pop.toast(error, 'error')
     //   }
     // })
-    // watchEffect(async() => {
-    //   if (AppState.tasks) {
-    //     try {
-    //       await tasksService.findWeight(props.backlogItem.id)
-    //     } catch (error) {
-    //       Pop.toast(error, 'error')
-    //     }
-    //   }
-    // })
+    watchEffect(async() => {
+      if (AppState.tasks) {
+        try {
+          await tasksService.findWeight(props.backlogItem.id)
+        } catch (error) {
+          Pop.toast(error, 'error')
+        }
+      }
+    })
     return {
     }
   }
