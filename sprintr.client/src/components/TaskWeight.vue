@@ -3,9 +3,10 @@
 </template>
 
 <script>
-import { onMounted } from '@vue/runtime-core'
+import { onMounted, watchEffect } from '@vue/runtime-core'
 import Pop from '../utils/Pop'
 import { tasksService } from '../services/TasksService'
+import { AppState } from '../AppState'
 export default {
   props: {
     backlogItem: {
@@ -14,12 +15,21 @@ export default {
     }
   },
   setup(props) {
-    onMounted(async() => {
-      try {
-        const sum = await tasksService.findWeight(props.backlogItem.id)
-        return sum
-      } catch (error) {
-        Pop.toast(error, 'error')
+    // onMounted(async() => {
+    //   try {
+    //     const sum = await tasksService.findWeight(props.backlogItem.id)
+    //     return sum
+    //   } catch (error) {
+    //     Pop.toast(error, 'error')
+    //   }
+    // })
+    watchEffect(async() => {
+      if (AppState.tasks) {
+        try {
+          await tasksService.findWeight(props.backlogItem.id)
+        } catch (error) {
+          Pop.toast(error, 'error')
+        }
       }
     })
     return {

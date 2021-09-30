@@ -17,7 +17,6 @@ class TasksService {
 
   async findWeight(backlogItemId) {
     let sum = 0
-    debugger
     const tasksArr = AppState.tasks
     for (let i = 0; i <= tasksArr.length; i++) {
       const task = tasksArr[i]
