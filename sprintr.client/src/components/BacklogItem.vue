@@ -113,14 +113,14 @@ export default {
   setup() {
     const editable = ref({})
     const route = useRoute()
-    onMounted(async() => {
-      try {
-        await tasksService.getTasks(route.params.id)
-        await notesService.getNotes(route.params.id)
-      } catch (error) {
-        Pop.toast(error, 'error')
-      }
-    })
+    // onMounted(async() => {
+    //   try {
+    //     await tasksService.getTasks(route.params.id)
+    //     await notesService.getNotes(route.params.id)
+    //   } catch (error) {
+    //     Pop.toast(error, 'error')
+    //   }
+    // })
     return {
       editable,
       async getSprintsById() {

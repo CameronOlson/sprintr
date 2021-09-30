@@ -24,6 +24,8 @@ import { useRoute } from 'vue-router'
 import { AppState } from '../AppState'
 import { backlogItemsService } from '../services/BacklogItemsService'
 import Pop from '../utils/Pop'
+import { tasksService } from '../services/TasksService'
+import { notesService } from '../services/NotesService'
 export default {
   setup() {
     const route = useRoute()
@@ -34,6 +36,8 @@ export default {
       if (route.params.id) {
         try {
           await backlogItemsService.getBacklogItemsByProjectId(route.params.id)
+          await tasksService.getTasks(route.params.id)
+          await notesService.getNotes(route.params.id)
         } catch (error) {
           Pop.toast(error, 'error')
         }
