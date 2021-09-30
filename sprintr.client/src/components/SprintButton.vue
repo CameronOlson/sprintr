@@ -1,7 +1,7 @@
 <template>
   <li class="nav-item">
     <router-link :to="{name: 'Project.Sprint', params:{sprintId: sprint.id}}">
-      <a class="nav-link active" aria-current="page">Sprint</a>
+      <a class="nav-link active" aria-current="page">{{ sprint.name }}</a>
     </router-link>
   </li>
 </template>
