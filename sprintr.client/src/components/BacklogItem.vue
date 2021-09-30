@@ -141,6 +141,7 @@ export default {
 
       sprints: computed(() => AppState.sprints),
       tasks: computed(() => AppState.tasks)
+
     }
   }
 }
