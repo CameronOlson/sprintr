@@ -30,6 +30,7 @@ import { backlogItemsService } from '../services/BacklogItemsService'
 import Pop from '../utils/Pop'
 import { tasksService } from '../services/TasksService'
 import { notesService } from '../services/NotesService'
+import { projectsService } from '../services/ProjectsService'
 export default {
   setup() {
     const route = useRoute()
@@ -42,6 +43,7 @@ export default {
           await backlogItemsService.getBacklogItemsByProjectId(route.params.id)
           await tasksService.getTasks(route.params.id)
           await notesService.getNotes(route.params.id)
+          await projectsService.getProjectById(route.params.id)
         } catch (error) {
           Pop.toast(error, 'error')
         }
