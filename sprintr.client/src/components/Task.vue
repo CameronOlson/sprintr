@@ -55,7 +55,9 @@ export default {
           }
         } else Pop.toast("This isn't your task, amigo")
       },
-      tasks: computed(() => AppState.tasks)
+      tasks: computed(() => AppState.tasks),
+      totalWeight: computed(() => AppState.tasks)
+
     }
   }
 }
