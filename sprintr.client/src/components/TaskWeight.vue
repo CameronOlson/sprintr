@@ -16,7 +16,7 @@ export default {
   },
   setup(props) {
     watchEffect(async() => {
-      // if (AppState.tasks.length) {
+      // if (AppState.tasks) {
       //   try {
       //     await tasksService.findWeight(props.backlogItem.id)
       //   } catch (error) {

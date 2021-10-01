@@ -40,7 +40,8 @@ class TasksService {
     task.isComplete = !task.isComplete
     const res = await api.put('api/projects/' + projectId + '/tasks/' + taskId, task)
     logger.log(res.data.isComplete)
-    const i = AppState.tasks.findIndex(t => t.taskId === taskId)
+    debugger
+    const i = AppState.tasks.findIndex(t => t.id === taskId)
     AppState.tasks.splice(i, 1, res.data)
     AppState.tasks = [...AppState.tasks]
   }
