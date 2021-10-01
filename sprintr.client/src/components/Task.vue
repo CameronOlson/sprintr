@@ -40,9 +40,7 @@ export default {
       async removeTask() {
         if (await Pop.confirm()) {
           try {
-            if (await Pop.confirm) {
-              await tasksService.removeTask(route.params.id, props.task.id)
-            }
+            await tasksService.removeTask(route.params.id, props.task.id)
           } catch (error) {
             Pop.toast(error, 'error')
           }
