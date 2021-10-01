@@ -36,6 +36,7 @@
 import { ref } from '@vue/reactivity'
 import { useRoute, useRouter } from 'vue-router'
 import { sprintsService } from '../services/SprintsService'
+import { Modal } from 'bootstrap'
 export default {
   setup() {
     const editable = ref({})
@@ -48,6 +49,9 @@ export default {
       async createSprint() {
         try {
           const sprintId = await sprintsService.createSprint(route.params.id, editable.value)
+          const modal = Modal.getInstance(document.getElementById('sprint-form'))
+          modal.hide()
+
           router.push({
             name: 'Project.Sprint',
             params: { sprintId: sprintId }
