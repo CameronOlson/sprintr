@@ -16,6 +16,8 @@
           <div>
             <a class="mdi mdi-delete selectable f-20" title="Delete Backlog Item" @click="removeBacklogItem(backlogItem.id)">
             </a>
+          </div>
+          <div>
             <span class="dropdown">
               <button class="card-link dropdown-toggle"
                       type="button"

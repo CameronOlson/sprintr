@@ -6,7 +6,7 @@
     </div>
     <dir>
       {{ note.body }}
-      <a class="mdi mdi-delete selectable" title="Delete Note" @click="removeNote()"></a>
+      <a class="mdi mdi-delete selectable f-20" title="Delete Note" @click="removeNote()"></a>
     </dir>
   </div>
 </template>

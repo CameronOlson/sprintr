@@ -1,8 +1,8 @@
 <template>
   <li v-if="task.backlogItemId === backlogItem.id">
     <p @click.prevent="toggleCheck()">
-      <span v-if="task.isComplete === true" class="mdi mdi-checkbox-multiple-marked"></span>
-      <span v-else class="mdi mdi-checkbox-multiple-blank-outline"></span>
+      <span v-if="task.isComplete === true" class="mdi mdi-checkbox-multiple-marked selectable"></span>
+      <span v-else class="mdi mdi-checkbox-multiple-blank-outline selectable"></span>
       {{ task.name }} Weight: {{ task.weight }} <i v-if="account.id === task.creatorId" @click="removeTask()" class="mdi mdi-delete selectable"></i>
     </p>
   </li>
