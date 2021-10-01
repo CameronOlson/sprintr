@@ -1,9 +1,14 @@
 <template>
-  <p v-if="note.backlogItemId === backlogItem.id">
-    <img :src="note.creator.picture" alt="" class="small">
-    {{ note.body }}
-    <a class="mdi mdi-delete selectable" @click="removeNote()"></a>
-  </p>
+  <div class="move-side" v-if="note.backlogItemId === backlogItem.id">
+    <div>
+      <span>{{ note.creator.name }}</span>
+      <img :src="note.creator.picture" alt="" class="small">
+    </div>
+    <dir>
+      {{ note.body }}
+      <a class="mdi mdi-delete selectable" title="Delete Note" @click="removeNote()"></a>
+    </dir>
+  </div>
 </template>
 
 <script>
@@ -44,6 +49,11 @@ export default {
 .small{
   height: 50px;
   border-radius: 50%;
+}
+
+.move-side{
+  display: flex;
+  justify-content: space-between;
 }
 
 </style>
