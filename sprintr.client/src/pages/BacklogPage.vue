@@ -1,6 +1,11 @@
 <template>
   <div class="container-fluid">
     <div class="row">
+      <div class="text-center">
+        <h1 class="my-text">
+          Backlog
+        </h1>
+      </div>
       <div class="col-12 text-center py-2">
         <button class=" btn btn-og mb-2" type="button" data-bs-toggle="modal" data-bs-target="#backlog-form">
           Add Item
@@ -89,6 +94,9 @@ export default {
 .center-this{
   display: flex;
   align-items: center;
+}
+.my-text{
+  color: aliceblue;
 }
 
 </style>

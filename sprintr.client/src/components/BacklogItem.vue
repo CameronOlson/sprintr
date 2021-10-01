@@ -2,7 +2,7 @@
   <div class="container-fluid">
     <div class="component">
       <div class="col-10 m-auto">
-        <div class="card p-2 m-2">
+        <div class="card p-3 m-2">
           <div class="card-header text-center my-card">
             <span>
               <h2>

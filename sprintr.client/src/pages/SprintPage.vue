@@ -1,10 +1,12 @@
 <template>
   <div v-if="sprint" class="container-fluid">
-    <div class="row">
-      <h1>{{ sprint.name }}</h1>
+    <div class="row text-center">
+      <h1 class="my-text">
+        {{ sprint.name }}
+      </h1>
     </div>
-    <div>
-      <button v-if="account.id == sprint.creatorId" @click="deleteSprint()">
+    <div class="text-center">
+      <button class="btn-og" v-if="account.id == sprint.creatorId" @click="deleteSprint()">
         Delete Sprint
       </button>
     </div>
@@ -70,5 +72,27 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.my-text{
+  color:aliceblue;
+}
+.btn-og{
+  display: inline-block;
+
+  border: 2px solid aliceblue;
+  border-radius: 0.12em;
+  text-decoration: none;
+  background-color: Transparent;
+  background-repeat:no-repeat;
+  color:aliceblue;
+  font-family: 'Roboto',sans-serif;
+  text-align: center;
+  transition: all 0.2s;
+  box-sizing: border-box;
+}
+.btn-og:hover{
+  background-color: aliceblue;
+  color:#000000;
+
+}
 
 </style>
