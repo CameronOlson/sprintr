@@ -12,7 +12,6 @@
       <i v-if="account.id === task.creatorId" @click="removeTask()" class="mdi mdi-delete selectable"></i>
     </div>
   </div>
-<!-- v-if="task.isComplete ? 'checked' : ''" -->
 </template>
 
 <script>
@@ -50,11 +49,13 @@ export default {
         }
       },
       async toggleCheck() {
-        try {
-          await tasksService.toggleCheck(route.params.id, props.task.id, props.task)
-        } catch (error) {
-          Pop.toast(error, 'error')
-        }
+        if (AppState.account.id === props.task.creatorId) {
+          try {
+            await tasksService.toggleCheck(route.params.id, props.task.id, props.task)
+          } catch (error) {
+            Pop.toast(error, 'error')
+          }
+        } else Pop.toast('Noooo way amigo')
       },
       tasks: computed(() => AppState.tasks)
     }
