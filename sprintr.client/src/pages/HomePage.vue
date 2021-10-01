@@ -1,9 +1,12 @@
 <template>
+  <div class="text-center">
+    <h1>SPRINTR</h1>
+  </div>
   <div class="home my-3 flex-grow-1 d-flex flex-column align-items-center justify-content-center">
     <div class="card card-size bg-brown m-3">
       <div class="card-body scrollable-y bg-black">
         <div class="card-title">
-          <button class=" btn btn-primary mb-2" type="button" data-bs-toggle="modal" data-bs-target="#post-form">
+          <button class=" btn btn-og mb-2" type="button" data-bs-toggle="modal" data-bs-target="#post-form">
             Create Project
           </button>
           <div>
@@ -71,9 +74,28 @@ export default {
   height: 80vh;
   width: 70vw
 }
-.card{
-  background-color: #22333B;
-  color:aliceblue
-}
 
+.btn-og{
+  display: inline-block;
+
+  border: 2px solid aliceblue;
+  border-radius: 0.12em;
+  text-decoration: none;
+  background-color: Transparent;
+  background-repeat:no-repeat;
+  color:aliceblue;
+  font-family: 'Roboto',sans-serif;
+  text-align: center;
+  transition: all 0.2s;
+  box-sizing: border-box;
+}
+.btn-og:hover{
+  background-color: aliceblue;
+  color:#000000;
+
+}
+.center-this{
+  display: flex;
+
+}
 </style>

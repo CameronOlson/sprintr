@@ -3,14 +3,14 @@
     <div class="component">
       <div class="col-10 m-auto">
         <div class="card">
-          <div class="card-header text-center">
+          <div class="card-header text-center my-card">
             <span>
               <h2>
                 {{ backlogItem.name }}
               </h2>
-              <p class="card-text">
-                {{ backlogItem.status }}
-              </p>
+              <h6 class="card-title">
+                {{ backlogItem.description }}
+              </h6>
             </span>
           </div>
           <div class="my-card">
@@ -40,9 +40,12 @@
               </span>
             </div>
             <div>
-              <h5 class="card-title">
-                {{ backlogItem.description }}
-              </h5>
+              <!-- TODO -->
+              <div>
+                <p class="card-text">
+                  Status: {{ backlogItem.status }}
+                </p>
+              </div>
               <TaskWeight :backlog-item="backlogItem" />
             </div>
             <div>
@@ -146,10 +149,15 @@ export default {
 .my-card{
   display: flex;
   justify-content: space-around;
+  align-items: center;
 }
 .btn-og{
 display: inline-block;
 color:aliceblue
+}
+.my-card{
+  background-color: black;
+  color: aliceblue;
 }
 
 </style>

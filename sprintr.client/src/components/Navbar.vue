@@ -1,8 +1,10 @@
 <template>
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark px-3">
+  <nav class="navbar navbar-expand-lg bg-black px-3">
     <router-link class="navbar-brand d-flex" :to="{ name: 'Home' }">
       <div class="d-flex flex-column align-items-center">
-        <button>Go Home</button>
+        <button class="btn-og">
+          Home
+        </button>
       </div>
     </router-link>
     <button
@@ -37,7 +39,7 @@
               :src="user.picture"
               alt="user photo"
               height="40"
-              class="rounded"
+              class="my-picture"
             />
             <span class="mx-3 text-success lighten-30">{{ user.name }}</span>
           </div>
@@ -106,5 +108,32 @@ a:hover {
   border-bottom: 2px solid var(--bs-success);
   border-bottom-left-radius: 0;
   border-bottom-right-radius: 0;
+}
+.btn-og{
+  display: inline-block;
+
+  border: 2px solid aliceblue;
+  border-radius: 0.12em;
+  text-decoration: none;
+  background-color: Transparent;
+  background-repeat:no-repeat;
+  color:aliceblue;
+  font-family: 'Roboto',sans-serif;
+  text-align: center;
+  transition: all 0.2s;
+  box-sizing: border-box;
+}
+.btn-og:hover{
+  background-color: aliceblue;
+  color:#000000;
+
+}
+
+.bg-black{
+  background-color: black;
+  color: aliceblue;
+}
+.my-picture{
+  border-radius: 50%;
 }
 </style>

@@ -105,7 +105,7 @@ export default {
   align-items: center;
 }
 .bg-black{
-  background-color: #22333B;
+  background-color: #000000;
   color:aliceblue;
 }
 

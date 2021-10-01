@@ -4,10 +4,10 @@
       <h6>Status: {{ backlogItem.status }}</h6>
       <div v-if="account.id === backlogItem.creatorId">
 
-        <button @click.prevent="pendingBacklogItemById(backlogItem.id)"><a class="dropdown-item">Pending</a></button>
-        <button @click.prevent="inProgressBacklogItemById(backlogItem.id)"><a class="dropdown-item">In-Progress</a></button>
-        <button @click.prevent="reviewBacklogItemById(backlogItem.id)"><a class="dropdown-item">Review</a></button>
-        <button @click.prevent="doneBacklogItemById(backlogItem.id)"><a class="dropdown-item">Done</a></button>
+        <button class="btn btn-secondary m-1" @click.prevent="pendingBacklogItemById(backlogItem.id)">Pending</button>
+        <button class="btn btn-secondary m-1" @click.prevent="inProgressBacklogItemById(backlogItem.id)">In Progress</button>
+        <button class="btn btn-secondary m-1" @click.prevent="reviewBacklogItemById(backlogItem.id)">Review</button>
+        <button class="btn btn-secondary m-1" @click.prevent="doneBacklogItemById(backlogItem.id)">Done</button>
       </div>
       <div class="center-these">
 
@@ -103,6 +103,11 @@ export default {
 <style lang="scss" scoped>
 .center-these{
   display: flex;
+}
+
+.bg-black{
+  background-color: #22333B;
+  color:aliceblue;
 }
 
 </style>

@@ -1,8 +1,8 @@
 <template>
   <div class="container-fluid">
     <div class="row">
-      <div class="col-12">
-        <button class=" btn btn-primary mb-2" type="button" data-bs-toggle="modal" data-bs-target="#backlog-form">
+      <div class="col-12 text-center py-2">
+        <button class=" btn btn-og mb-2" type="button" data-bs-toggle="modal" data-bs-target="#backlog-form">
           Add Item
         </button>
       </div>
@@ -65,6 +65,30 @@ export default {
 .bg-black{
   background-color: #22333B;
   color:aliceblue;
+}
+
+.btn-og{
+  display: inline-block;
+
+  border: 2px solid aliceblue;
+  border-radius: 0.12em;
+  text-decoration: none;
+  background-color: Transparent;
+  background-repeat:no-repeat;
+  color:aliceblue;
+  font-family: 'Roboto',sans-serif;
+  text-align: center;
+  transition: all 0.2s;
+  box-sizing: border-box;
+}
+.btn-og:hover{
+  background-color: aliceblue;
+  color:#000000;
+
+}
+.center-this{
+  display: flex;
+  align-items: center;
 }
 
 </style>
