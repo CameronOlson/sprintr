@@ -56,7 +56,9 @@ export default {
           Pop.toast(error, 'error')
         }
       },
-      tasks: computed(() => AppState.tasks)
+      tasks: computed(() => AppState.tasks),
+      totalWeight: computed(() => AppState.tasks)
+
     }
   }
 }
