@@ -1,7 +1,10 @@
 <template>
   <header v-if="project">
     <ul class="nav nav-tabs">
-      <h1>{{ project.name }}</h1>
+      <div class="d-flex">
+        <div><i class="mdi mdi-delete selectable f-20" title="Delete Project" @click="deleteProject()"></i></div>
+        <div><h1>{{ project.name }}</h1></div>
+      </div>
       <li class="nav-item">
         <router-link :to="{name: 'Project.Backlog'}">
           <a class="nav-link active" aria-current="page">Backlog</a>
@@ -16,7 +19,6 @@
       </li>
     </ul>
     <div v-if="account.id == project.creatorId">
-      <i class="mdi mdi-delete selectable" @click="deleteProject()"></i>
     </div>
   </header>
   <header v-else>

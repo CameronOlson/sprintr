@@ -1,7 +1,7 @@
 <template>
   <form @submit.prevent="createNote()">
     <span>
-      <h6>{{ backlogItem.status }}</h6>
+      <h6>Status: {{ backlogItem.status }}</h6>
 
       <button @click.prevent="pendingBacklogItemById(backlogItem.id)"><a class="dropdown-item">Pending</a></button>
       <button @click.prevent="inProgressBacklogItemById(backlogItem.id)"><a class="dropdown-item">In-Progress</a></button>
@@ -20,7 +20,7 @@
           </label>
         </div>
         <div>
-          <button type="submit" class="mdi mdi-send ">
+          <button type="submit" class="mdi mdi-send" title="Post-Note">
           </button>
         </div>
       </div>
