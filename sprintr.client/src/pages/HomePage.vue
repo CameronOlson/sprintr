@@ -1,6 +1,8 @@
 <template>
   <div class="text-center">
-    <h1>SPRINTR</h1>
+    <h1 class="text-light">
+      SPRINTR
+    </h1>
   </div>
   <div class="home my-3 flex-grow-1 d-flex flex-column align-items-center justify-content-center">
     <div class="card card-size bg-brown m-3">

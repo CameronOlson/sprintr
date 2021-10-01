@@ -20,7 +20,7 @@
             </div>
             <div v-if="account.id === backlogItem.creatorId">
               <span class="dropdown">
-                <button class="btn btn-og card-link dropdown-toggle"
+                <button class="btn btn-og card-link dropdown-toggle m-2"
                         type="button"
                         id="dropdownMenuButton1"
                         data-bs-toggle="dropdown"
