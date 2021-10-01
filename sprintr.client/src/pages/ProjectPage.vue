@@ -2,7 +2,7 @@
   <header v-if="project">
     <ul class="nav nav-tabs">
       <div class="d-flex">
-        <div><i class="mdi mdi-delete selectable f-20" title="Delete Project" @click="deleteProject()"></i></div>
+        <div><i v-if="account.id === project.creatorId" class="mdi mdi-delete selectable f-20" title="Delete Project" @click="deleteProject()"></i></div>
         <div><h1>{{ project.name }}</h1></div>
       </div>
       <li class="nav-item">
