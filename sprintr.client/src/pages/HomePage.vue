@@ -1,7 +1,7 @@
 <template>
-  <div class="home flex-grow-1 d-flex flex-column align-items-center justify-content-center">
+  <div class="home my-3 flex-grow-1 d-flex flex-column align-items-center justify-content-center">
     <div class="card card-size m-3">
-      <div class="card-body">
+      <div class="card-body scrollable-y">
         <div class="card-title">
           <button class=" btn btn-primary mb-2" type="button" data-bs-toggle="modal" data-bs-target="#post-form">
             Create Project
@@ -69,7 +69,6 @@ export default {
 
 .card-size{
   height: 80vh;
-  width: 80vw;
-  overflow: scroll;
+  width: 80vw
 }
 </style>
