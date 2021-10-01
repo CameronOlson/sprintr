@@ -12,71 +12,66 @@
             </p>
           </span>
         </div>
-        <div class="d-flex justify-content-space-between">
-          <a class="mdi mdi-delete selectable f-20" @click="removeBacklogItem(backlogItem.id)">
-          </a>
-          <div class="dropdown">
-            <button class="card-link dropdown-toggle"
-                    type="button"
-                    id="dropdownMenuButton1"
-                    data-bs-toggle="dropdown"
-                    aria-expanded="false"
-                    @click="getSprintsById()"
-            >
-              Move to Sprint
-            </button>
-            <ul v-if="sprints" class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-              <SprintList v-for="s in sprints" :key="s.id" :sprint="s" :backlog-item="backlogItem" />
-            </ul>
-            <ul v-else class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-              <li>
-                Loading...
-              </li>
-            </ul>
-          </div>
-        </div>
-        <h5 class="card-title">
-          {{ backlogItem.description }}
-        </h5>
-        <TaskWeight :backlog-item="backlogItem" />
-
-        <div class="dropdown">
-          <a class="card-link"
-             href="#collapseExample1"
-             role="button"
-             aria-expanded="false"
-             aria-controls="collapseExample1"
-             :data-bs-target="'#details-modal-' + backlogItem.id"
-             data-bs-toggle="modal"
-          >
-            Details
-          </a>
-
-          <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-          </ul>
-        </div>
-
-        <div class="card-body">
-          <a class="card-link"
-             href="#collapseExample1"
-             role="button"
-             aria-expanded="false"
-             aria-controls="collapseExample1"
-             :data-bs-target="'#task-modal-' + backlogItem.id"
-             data-bs-toggle="modal"
-          >
-            Tasks
-          </a>
-          <div class="collapse" id="collapseExample1">
-            <div class="card card-body">
-              <ul>
+        <div class="my-card">
+          <div>
+            <a class="mdi mdi-delete selectable f-20" @click="removeBacklogItem(backlogItem.id)">
+            </a>
+            <span class="dropdown">
+              <button class="card-link dropdown-toggle"
+                      type="button"
+                      id="dropdownMenuButton1"
+                      data-bs-toggle="dropdown"
+                      aria-expanded="false"
+                      @click="getSprintsById()"
+              >
+                Move to Sprint
+              </button>
+              <ul v-if="sprints" class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                <SprintList v-for="s in sprints" :key="s.id" :sprint="s" :backlog-item="backlogItem" />
               </ul>
-            </div>
+              <ul v-else class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                <li>
+                  Loading...
+                </li>
+              </ul>
+            </span>
+          </div>
+          <div>
+            <h5 class="card-title">
+              {{ backlogItem.description }}
+            </h5>
+            <TaskWeight :backlog-item="backlogItem" />
+          </div>
+          <div>
+            <a class="card-link"
+               href="#collapseExample1"
+               role="button"
+               aria-expanded="false"
+               aria-controls="collapseExample1"
+               :data-bs-target="'#details-modal-' + backlogItem.id"
+               data-bs-toggle="modal"
+            >
+              Details
+            </a>
+          </div>
+
+          <div>
+            <a class="card-link"
+               href="#collapseExample1"
+               role="button"
+               aria-expanded="false"
+               aria-controls="collapseExample1"
+               :data-bs-target="'#task-modal-' + backlogItem.id"
+               data-bs-toggle="modal"
+            >
+              Tasks
+            </a>
           </div>
         </div>
       </div>
     </div>
   </div>
+
   <footer>
     <Modal :id="'task-modal-' + backlogItem.id">
       <template #modal-title>
@@ -134,12 +129,15 @@ export default {
           Pop.toast(error, 'error')
         }
       },
+
       async removeBacklogItem(backlogItemId) {
-        try {
-          await backlogItemsService.removeBacklogItem(route.params.id, backlogItemId)
-          Pop.toast('this has been removed')
-        } catch (error) {
-          Pop.toast(error, 'error')
+        if (await Pop.confirm()) {
+          try {
+            await backlogItemsService.removeBacklogItem(route.params.id, backlogItemId)
+            Pop.toast('this has been removed')
+          } catch (error) {
+            Pop.toast(error, 'error')
+          }
         }
       },
 
@@ -152,5 +150,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.my-card{
+  display: flex;
+  justify-content: space-around;
+}
 
 </style>

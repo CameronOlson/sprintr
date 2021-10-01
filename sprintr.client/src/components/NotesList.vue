@@ -25,10 +25,12 @@ export default {
     const route = useRoute()
     return {
       async removeNote() {
-        try {
-          await notesService.removeNote(route.params.id, props.note.id)
-        } catch (error) {
-          Pop.toast(error, 'error')
+        if (await Pop.confirm()) {
+          try {
+            await notesService.removeNote(route.params.id, props.note.id)
+          } catch (error) {
+            Pop.toast(error, 'error')
+          }
         }
       }
 

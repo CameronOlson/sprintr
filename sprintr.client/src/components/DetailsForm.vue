@@ -55,7 +55,6 @@ export default {
       async pendingBacklogItemById(backlogItemId) {
         try {
           await backlogItemsService.pendingBacklogItemById(route.params.id, backlogItemId)
-          Pop.toast('status is pending')
         } catch (error) {
           Pop.toast(error, 'error')
         }
@@ -63,7 +62,6 @@ export default {
       async inProgressBacklogItemById(backlogItemId) {
         try {
           await backlogItemsService.inProgressBacklogItemById(route.params.id, backlogItemId)
-          Pop.toast('status is in progress')
         } catch (error) {
           Pop.toast(error, 'error')
         }
@@ -71,7 +69,6 @@ export default {
       async reviewBacklogItemById(backlogItemId) {
         try {
           await backlogItemsService.reviewBacklogItemById(route.params.id, backlogItemId)
-          Pop.toast('status is review')
         } catch (error) {
           Pop.toast(error, 'error')
         }
@@ -79,7 +76,6 @@ export default {
       async doneBacklogItemById(backlogItemId) {
         try {
           await backlogItemsService.doneBacklogItemById(route.params.id, backlogItemId)
-          Pop.toast('status is done')
         } catch (error) {
           Pop.toast(error, 'error')
         }
