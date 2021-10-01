@@ -1,10 +1,16 @@
 <template>
   <div v-if="task.backlogItemId === backlogItem.id">
-    <p @click.prevent="toggleCheck()">
+    <div class="move-out" @click.prevent="toggleCheck()">
       <span v-if="task.isComplete === true" class="mdi mdi-checkbox-multiple-marked selectable"></span>
       <span v-else class="mdi mdi-checkbox-multiple-blank-outline selectable"></span>
-      {{ task.name }} Weight: {{ task.weight }} <i v-if="account.id === task.creatorId" @click="removeTask()" class="mdi mdi-delete selectable"></i>
-    </p>
+      <div>
+        {{ task.name }}
+      </div>
+      <div>
+        Weight: {{ task.weight }}
+      </div>
+      <i v-if="account.id === task.creatorId" @click="removeTask()" class="mdi mdi-delete selectable"></i>
+    </div>
   </div>
 <!-- v-if="task.isComplete ? 'checked' : ''" -->
 </template>
@@ -57,5 +63,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.move-out{
+  display: flex;
+  justify-content: space-between;
+}
 
 </style>
