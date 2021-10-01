@@ -1,23 +1,31 @@
 <template>
   <header v-if="project">
-    <ul class="nav nav-tabs">
+    <div class="pad">
       <div class="d-flex">
         <div><i v-if="account.id === project.creatorId" class="mdi mdi-delete selectable f-20" title="Delete Project" @click="deleteProject()"></i></div>
         <div><h1>{{ project.name }}</h1></div>
       </div>
-      <li class="nav-item">
-        <router-link :to="{name: 'Project.Backlog'}">
-          <a class="nav-link active" aria-current="page">Backlog</a>
-        </router-link>
-      </li>
-      <SprintButton v-for="s in sprints" :key="s.id" :sprint="s" />
-      <li class="nav-item" v-if="account.id == project.creatorId">
-        <a class="nav-link active selectable" data-bs-toggle="modal" data-bs-target="#sprint-form" aria-current="page">New Sprint
-          <i class="mdi mdi-plus">
-          </i>
-        </a>
-      </li>
-    </ul>
+      <div class="center-this">
+        <ul class="nav nav-tabs">
+          <li class="nav-item">
+            <router-link :to="{name: 'Project.Backlog'}">
+              <div class="pad">
+                <a class="link-primary" aria-current="page">Backlog</a>
+              </div>
+            </router-link>
+          </li>
+          <SprintButton v-for="s in sprints" :key="s.id" :sprint="s" />
+          <li class="nav-item" v-if="account.id == project.creatorId">
+            <div class="pad">
+              <a class="link-primary selectable" data-bs-toggle="modal" data-bs-target="#sprint-form" aria-current="page">New Sprint
+                <i class="mdi mdi-plus">
+                </i>
+              </a>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
     <div v-if="account.id == project.creatorId">
     </div>
   </header>
@@ -87,5 +95,14 @@ export default {
 </script>
 
 <style>
+.pad{
+  display: flex;
+  padding-left: 1rem;
+}
+
+.center-this{
+  display: flex;
+  align-items: center;
+}
 
 </style>
