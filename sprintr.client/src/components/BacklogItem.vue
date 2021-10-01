@@ -13,7 +13,7 @@
           </span>
         </div>
         <div class="my-card">
-          <div>
+          <div v-if="account.id === backlogItem.creatorId">
             <a class="mdi mdi-delete selectable f-20" title="Delete Backlog Item" @click="removeBacklogItem(backlogItem.id)">
             </a>
           </div>
@@ -96,12 +96,10 @@
 </template>
 
 <script>
-import { computed, onMounted, ref } from '@vue/runtime-core'
+import { computed, ref } from '@vue/runtime-core'
 import { useRoute } from 'vue-router'
 import { backlogItemsService } from '../services/BacklogItemsService'
 import { sprintsService } from '../services/SprintsService'
-import { tasksService } from '../services/TasksService'
-import { notesService } from '../services/NotesService'
 import Pop from '../utils/Pop'
 import { AppState } from '../AppState'
 export default {
@@ -114,14 +112,6 @@ export default {
   setup() {
     const editable = ref({})
     const route = useRoute()
-    // onMounted(async() => {
-    //   try {
-    //     await tasksService.getTasks(route.params.id)
-    //     await notesService.getNotes(route.params.id)
-    //   } catch (error) {
-    //     Pop.toast(error, 'error')
-    //   }
-    // })
     return {
       editable,
       async getSprintsById() {
@@ -142,7 +132,7 @@ export default {
           }
         }
       },
-
+      account: computed(() => AppState.account),
       sprints: computed(() => AppState.sprints),
       tasks: computed(() => AppState.tasks)
 
