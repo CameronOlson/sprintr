@@ -6,15 +6,17 @@
     </div>
     <dir>
       {{ note.body }}
-      <a class="mdi mdi-delete selectable f-20" title="Delete Note" @click="removeNote()"></a>
+      <a v-if="note.creatorId === account.id" class="mdi mdi-delete selectable f-20" title="Delete Note" @click="removeNote()"></a>
     </dir>
   </div>
 </template>
 
 <script>
+import { computed } from '@vue/runtime-core'
 import { useRoute } from 'vue-router'
 import { notesService } from '../services/NotesService'
 import Pop from '../utils/Pop'
+import { AppState } from '../AppState'
 export default {
   props: {
     note: {
@@ -37,8 +39,8 @@ export default {
             Pop.toast(error, 'error')
           }
         }
-      }
-
+      },
+      account: computed(() => AppState.account)
     }
   }
 }
