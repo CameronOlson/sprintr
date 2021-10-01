@@ -2,11 +2,13 @@
   <form @submit.prevent="createNote()">
     <span>
       <h6>Status: {{ backlogItem.status }}</h6>
+      <div v-if="account.id === backlogItem.creatorId">
 
-      <button @click.prevent="pendingBacklogItemById(backlogItem.id)"><a class="dropdown-item">Pending</a></button>
-      <button @click.prevent="inProgressBacklogItemById(backlogItem.id)"><a class="dropdown-item">In-Progress</a></button>
-      <button @click.prevent="reviewBacklogItemById(backlogItem.id)"><a class="dropdown-item">Review</a></button>
-      <button @click.prevent="doneBacklogItemById(backlogItem.id)"><a class="dropdown-item">Done</a></button>
+        <button @click.prevent="pendingBacklogItemById(backlogItem.id)"><a class="dropdown-item">Pending</a></button>
+        <button @click.prevent="inProgressBacklogItemById(backlogItem.id)"><a class="dropdown-item">In-Progress</a></button>
+        <button @click.prevent="reviewBacklogItemById(backlogItem.id)"><a class="dropdown-item">Review</a></button>
+        <button @click.prevent="doneBacklogItemById(backlogItem.id)"><a class="dropdown-item">Done</a></button>
+      </div>
       <div class="center-these">
 
         <div class="form-group">
@@ -39,7 +41,7 @@ import { useRoute } from 'vue-router'
 import { backlogItemsService } from '../services/BacklogItemsService'
 import { notesService } from '../services/NotesService'
 import Pop from '../utils/Pop'
-import { computed, onMounted } from '@vue/runtime-core'
+import { computed } from '@vue/runtime-core'
 import { AppState } from '../AppState'
 export default {
   props: {
@@ -91,7 +93,7 @@ export default {
           Pop.toast(error, 'error')
         }
       },
-
+      account: computed(() => AppState.account),
       notes: computed(() => AppState.notes)
     }
   }
