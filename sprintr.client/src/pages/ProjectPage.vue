@@ -1,5 +1,5 @@
 <template>
-  <header v-if="project">
+  <header class="bg-black" v-if="project">
     <div class="pad">
       <div class="d-flex">
         <div><i v-if="account.id === project.creatorId" class="mdi mdi-delete selectable f-20" title="Delete Project" @click="deleteProject()"></i></div>
@@ -103,6 +103,10 @@ export default {
 .center-this{
   display: flex;
   align-items: center;
+}
+.bg-black{
+  background-color: #22333B;
+  color:aliceblue;
 }
 
 </style>

@@ -26,5 +26,13 @@ export default {
 </script>
 
 <style>
+.card-size{
+  height: 80vh;
+  width: 70vw
+}
+.card{
+  background-color: #101213;
+  color:aliceblue
+}
 
 </style>
