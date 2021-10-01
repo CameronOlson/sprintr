@@ -53,7 +53,7 @@ export default {
           } catch (error) {
             Pop.toast(error, 'error')
           }
-        } else Pop.toast('Noooo way amigo')
+        } else Pop.toast("This isn't your task, amigo")
       },
       tasks: computed(() => AppState.tasks)
     }
