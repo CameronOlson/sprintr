@@ -2,16 +2,18 @@
   <div class="container-fluid">
     <div class="component">
       <div class="col-10 m-auto">
-        <div class="card">
+        <div class="card p-2 m-2">
           <div class="card-header text-center my-card">
             <span>
               <h2>
                 {{ backlogItem.name }}
               </h2>
-              <h6 class="card-title">
-                {{ backlogItem.description }}
-              </h6>
             </span>
+          </div>
+          <div class="my-card p-2">
+            <h6 class="card-title">
+              {{ backlogItem.description }}
+            </h6>
           </div>
           <div class="my-card">
             <div v-if="account.id === backlogItem.creatorId">
