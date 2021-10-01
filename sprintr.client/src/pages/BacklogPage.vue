@@ -49,8 +49,8 @@ export default {
       if (route.params.id) {
         try {
           await backlogItemsService.getBacklogItemsByProjectId(route.params.id)
-          await tasksService.getTasks(route.params.id)
-          await notesService.getNotes(route.params.id)
+          // await tasksService.getTasks(route.params.id)
+          // await notesService.getNotes(route.params.id)
           await projectsService.getProjectById(route.params.id)
         } catch (error) {
           Pop.toast(error, 'error')

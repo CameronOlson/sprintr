@@ -42,7 +42,6 @@
               </span>
             </div>
             <div>
-              <!-- TODO -->
               <div>
                 <p class="card-text">
                   Status: {{ backlogItem.status }}
@@ -84,6 +83,7 @@
     <Modal :id="'task-modal-' + backlogItem.id">
       <template #modal-title>
         {{ backlogItem.name }}
+        {{ taskWeight }}
       </template>
       <template #modal-body>
         <TaskForm :backlog-item="backlogItem" />
@@ -115,7 +115,7 @@ export default {
       required: true
     }
   },
-  setup() {
+  setup(props) {
     const editable = ref({})
     const route = useRoute()
     return {
@@ -140,7 +140,14 @@ export default {
       },
       account: computed(() => AppState.account),
       sprints: computed(() => AppState.sprints),
-      tasks: computed(() => AppState.tasks)
+      tasks: computed(() => AppState.tasks),
+      taskWeight: computed(() => {
+        let weight = 0
+        const backlogItemTasks = AppState.tasks.filter(t => t.backlogItemId === props.backlogItem.id)
+        // eslint-disable-next-line no-return-assign
+        backlogItemTasks.forEach(t => weight += t.weight)
+        return weight
+      })
 
     }
   }
