@@ -18,7 +18,7 @@
 </template>
 
 <script>
-import { computed, onMounted, watchEffect } from '@vue/runtime-core'
+import { computed, watchEffect } from '@vue/runtime-core'
 import { useRoute, useRouter } from 'vue-router'
 import { AppState } from '../AppState'
 import { sprintsService } from '../services/SprintsService'
@@ -28,12 +28,11 @@ export default {
   setup() {
     const router = useRouter()
     const route = useRoute()
-    onMounted(() => {
-      AppState.sprint = null
-      AppState.backlogItems = null
-    })
     watchEffect(async() => {
       if (route.params.sprintId) {
+        AppState.sprint = null
+        AppState.backlogItems = null
+
         try {
           await sprintsService.getSprintById(route.params.id, route.params.sprintId)
           await sprintsService.getBacklogItemsBySprintId(route.params.id, route.params.sprintId)
