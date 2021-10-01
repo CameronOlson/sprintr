@@ -48,7 +48,8 @@ export default {
         } catch (error) {
           Pop.toast(error, 'error')
         }
-      }
+      },
+      tasks: computed(() => AppState.tasks)
     }
   }
 }
