@@ -7,19 +7,23 @@
       <button @click.prevent="inProgressBacklogItemById(backlogItem.id)"><a class="dropdown-item">In-Progress</a></button>
       <button @click.prevent="reviewBacklogItemById(backlogItem.id)"><a class="dropdown-item">Review</a></button>
       <button @click.prevent="doneBacklogItemById(backlogItem.id)"><a class="dropdown-item">Done</a></button>
+      <div class="center-these">
 
-      <div class="form-group">
-        <label for="body">
-          <input type="text"
-                 for="body"
-                 class="form-control bg-light"
-                 placeholder="Add Note"
-                 v-model="editable.body"
-          >
-        </label>
+        <div class="form-group">
+          <label for="body">
+            <input type="text"
+                   for="body"
+                   class="form-control bg-light"
+                   placeholder="Add Note"
+                   v-model="editable.body"
+            >
+          </label>
+        </div>
+        <div>
+          <button type="submit" class="mdi mdi-send ">
+          </button>
+        </div>
       </div>
-      <button type="submit" class="mdi mdi-send">
-      </button>
     </span>
     <span>
 
@@ -95,5 +99,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.center-these{
+  display: flex;
+}
 
 </style>
