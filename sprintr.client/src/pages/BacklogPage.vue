@@ -1,7 +1,7 @@
 <template>
   <div class="container-fluid">
     <div class="row">
-      <div class="col-12">
+      <div v-if="account.id === project.creatorId" class="col-12">
         <button class=" btn btn-primary mb-2" type="button" data-bs-toggle="modal" data-bs-target="#backlog-form">
           Add Item
         </button>
