@@ -8,8 +8,11 @@
       </div>
     </div>
   </div>
-  <div class="row">
+  <div class="row" v-if="backlogItems">
     <BacklogItem v-for="b in backlogItems" :key="b.id" :backlog-item="b" />
+  </div>
+  <div class="row" v-else>
+    Loading.........
   </div>
 
   <Modal id="backlog-form">
