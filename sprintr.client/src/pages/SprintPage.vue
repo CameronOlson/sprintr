@@ -14,11 +14,16 @@
       <h1>LOADING</h1>
     </div>
   </div>
-  <BacklogItem v-for="b in backlogItems" :key="b.id" :backlog-item="b" />
+  <div v-if="backlogItems">
+    <BacklogItem v-for="b in backlogItems" :key="b.id" :backlog-item="b" />
+  </div>
+  <div v-else>
+    Loading.......
+  </div>
 </template>
 
 <script>
-import { computed, watchEffect } from '@vue/runtime-core'
+import { computed, onMounted, watchEffect } from '@vue/runtime-core'
 import { useRoute, useRouter } from 'vue-router'
 import { AppState } from '../AppState'
 import { sprintsService } from '../services/SprintsService'
@@ -28,10 +33,13 @@ export default {
   setup() {
     const router = useRouter()
     const route = useRoute()
+    onMounted(() => {
+      AppState.backlogItems = []
+    })
     watchEffect(async() => {
       if (route.params.sprintId) {
-        AppState.sprint = null
         AppState.backlogItems = null
+        AppState.sprint = null
 
         try {
           await sprintsService.getSprintById(route.params.id, route.params.sprintId)
