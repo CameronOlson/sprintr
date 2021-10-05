@@ -8,9 +8,12 @@
     <div class="card card-size bg-brown m-3">
       <div class="card-body scrollable-y bg-black">
         <div class="card-title">
-          <button class=" btn btn-og mb-2" type="button" data-bs-toggle="modal" data-bs-target="#post-form">
-            Create Project
-          </button>
+          <div v-if="account">
+            <button class=" btn btn-og mb-2" type="button" data-bs-toggle="modal" data-bs-target="#post-form">
+              Create Project
+            </button>
+          </div>
+          <div></div>
           <div>
             <ProjectCard v-for="p in projects" :key="p.id" :project="p" />
           </div>
