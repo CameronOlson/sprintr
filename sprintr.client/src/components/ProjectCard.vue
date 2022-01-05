@@ -18,7 +18,7 @@
 export default {
   props: {
     project: {
-      type: Object,
+      type: Keep,
       required: true
     }
   }
